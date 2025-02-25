@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class BacklogService {
-  private apiUrl = 'http://localhost:3000/api/backlogs'; // Replace with your actual API base URL
+  private apiUrl = 'https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/backlogs'; // Replace with your actual API base URL
 
   constructor(private http: HttpClient) {}
 

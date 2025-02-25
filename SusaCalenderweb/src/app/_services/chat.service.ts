@@ -10,11 +10,11 @@ import { finalize } from 'rxjs/operators'; // Import finalize operator
 })
 export class ChatService {
   private socket: Socket;
-  private apiUrl = 'http://localhost:3000/api'; // Your backend API URL
+  private apiUrl = 'https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api'; // Your backend API URL
 
   constructor(private http: HttpClient, private storage: AngularFireStorage) {
     // Initialize socket connection
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app');
   }
 
   // Fetch all users except the current user

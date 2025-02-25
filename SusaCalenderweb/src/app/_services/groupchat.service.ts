@@ -11,7 +11,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class GroupchatService {
 
-  private apiUrl = 'http://localhost:3000'; // Replace with your backend URL
+  private apiUrl = 'https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app'; // Replace with your backend URL
   private socket: Socket;
   private currentGroupId: string | null = null;
 

@@ -46,47 +46,47 @@ export class EventService {
   })
 
   getAssigneeNames(){
-    return this.http.get<[]>("http://localhost:3000/api/user/getall");
+    return this.http.get<[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/getall");
   }
 
   getSchedules(){
-    return this.http.get<Schedule[]>("http://localhost:3000/api/schedule/getall");
+    return this.http.get<Schedule[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/schedule/getall");
   }
 
   addScheduleInSchedule(data){
-    return this.http.post("http://localhost:3000/api/schedule/addschedules", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/schedule/addschedules", data);
   }
 
   postSchedule(data){
-    return this.http.post<Schedule[]>("http://localhost:3000/api/schedule/add", data);
+    return this.http.post<Schedule[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/schedule/add", data);
   }
 
   deleteScheduleInSchedule(data){
-    return this.http.post("http://localhost:3000/api/schedule/deleteschedules", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/schedule/deleteschedules", data);
   }
 
   postEvent(data){
     console.log(data);
-    return this.http.post<EventDetails[]>("http://localhost:3000/api/event/addevents", data);
+    return this.http.post<EventDetails[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/event/addevents", data);
   }
 
   deleteEvent(data){
-    return this.http.post("http://localhost:3000/api/event/removeevent", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/event/removeevent", data);
   }
 
   getEvents(){
-    return this.http.get<EventDetails[]>("http://localhost:3000/api/event/getallevents");
+    return this.http.get<EventDetails[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/event/getallevents");
   }
 
   postSharedSchedule(data){
-    return this.http.post<SharedSchedule[]>("http://localhost:3000/api/shared/add", data);
+    return this.http.post<SharedSchedule[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/shared/add", data);
   }
 
   getSharedSchedules(){
-    return this.http.get<SharedSchedule[]>("http://localhost:3000/api/shared/getall");
+    return this.http.get<SharedSchedule[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/shared/getall");
   }
 
   deleteSharedSchedule(data){
-    return this.http.post("http://localhost:3000/api/shared/remove", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/shared/remove", data);
   }
 }

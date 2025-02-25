@@ -24,7 +24,7 @@ export interface Sprint {
   providedIn: 'root'
 })
 export class SprintService {
-  private apiUrl = `http://localhost:3000/api/sprint`; // Adjust your API base URL here
+  private apiUrl = `https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/sprint`; // Adjust your API base URL here
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +32,7 @@ export class SprintService {
   updateSprints(sprintData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/updatesprintdata/${sprintData.sprintId}`, sprintData);
   }
-  
+
   deleteTicket(sprintId: string, ticketId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${sprintId}/ticket/${ticketId}`);
   }
@@ -86,6 +86,6 @@ export class SprintService {
 
 
   getTicketsByIds(ticketIds: string[]): Observable<any[]> {
-    return this.http.post<any[]>('http://localhost:3000/api/kanban/tickets/byIds', { ids: ticketIds });
+    return this.http.post<any[]>('https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/tickets/byIds', { ids: ticketIds });
   }
 }

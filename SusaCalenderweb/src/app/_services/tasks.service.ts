@@ -75,7 +75,7 @@ export class TasksService {
     ticketowner: new FormControl(''),  // Assign user _id if available
     tickethours: new FormControl('')
   })
-  private baseUrl = "http://localhost:3000/api/kanban";
+  private baseUrl = "https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban";
 
 
 
@@ -88,7 +88,7 @@ export class TasksService {
   }
 
   getKanbanEventsByUser(userId: string) {
-    return this.http.get<kanbanEvents[]>(`http://localhost:3000/api/kanban/events/user/${userId}`);
+    return this.http.get<kanbanEvents[]>(`https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/events/user/${userId}`);
   }
 
   getTasks(): Observable<Tasks[]>{
@@ -108,51 +108,51 @@ export class TasksService {
   }
 
   getKanban(){
-    return this.http.get<Kanban[]>("http://localhost:3000/api/kanban/getall");
+    return this.http.get<Kanban[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/getall");
   }
 
   getKanbanData(){
-    return this.http.get<kanbanData[]>("http://localhost:3000/api/kanbandata/getall");
+    return this.http.get<kanbanData[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/getall");
   }
 
   addKanbanData(data){
-    return this.http.post<kanbanData>("http://localhost:3000/api/kanbandata/add", data);
+    return this.http.post<kanbanData>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/add", data);
   }
 
   getKanbanEvents(){
-    return this.http.get<kanbanEvents[]>("http://localhost:3000/api/kanban/getall");
+    return this.http.get<kanbanEvents[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/getall");
   }
 
   addKanbanEvents(data){
-    return this.http.post("http://localhost:3000/api/kanban/add", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/add", data);
   }
 
   updateKanbanEvents(data, id){
-    return this.http.post<kanbanEvents>(`http://localhost:3000/api/kanban/update?id=${id}`, data);
+    return this.http.post<kanbanEvents>(`https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/update?id=${id}`, data);
   }
 
   deleteKanbanEvents(data){
-    return this.http.post("http://localhost:3000/api/kanban/remove", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanban/remove", data);
   }
 
   addKanbanFields(data){
-    return this.http.post("http://localhost:3000/api/kanbandata/addkanbanFields", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/addkanbanFields", data);
   }
 
   deleteKanbanFields(data){
-    return this.http.post("http://localhost:3000/api/kanbandata/deletekanbanFields", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/deletekanbanFields", data);
   }
 
   updateKanbanFieldStatusId(data){
-    return this.http.post("http://localhost:3000/api/kanbandata/updatestatusIdkanbanFields", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/updatestatusIdkanbanFields", data);
   }
 
   addSharedKanban(data){
-    return this.http.post("http://localhost:3000/api/kanbandata/addsharedKanban", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/addsharedKanban", data);
   }
 
   deleteSharedKanban(data){
-    return this.http.post("http://localhost:3000/api/kanbandata/deletesharedKanban", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/kanbandata/deletesharedKanban", data);
   }
 
   addKanban(data){
@@ -168,24 +168,24 @@ export class TasksService {
   }
 
   getBackgroundPictures(){
-    return this.http.get<background[]>("http://localhost:3000/api/themes/getall");
+    return this.http.get<background[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/themes/getall");
   }
 
   deleteBackground(data){
-    return this.http.post("http://localhost:3000/api/themes/remove", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/themes/remove", data);
   }
 
   addBackground(data){
-    return this.http.post("http://localhost:3000/api/themes/add", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/themes/add", data);
   }
 
   uploadImages(data): Observable<{}>{
     const formData = new FormData();
     formData.append("file", data);
-    return this.http.post("http://localhost:3000/api/upload/addfiles", formData);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/upload/addfiles", formData);
   }
 
-  private apiUrl = 'http://localhost:3000/api/Kanban';
+  private apiUrl = 'https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/Kanban';
   getTicketsByOwner(ticketownerId: string): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(`${this.apiUrl}/detailsid/${ticketownerId}`).pipe(
         catchError(this.handleError) // Handle errors

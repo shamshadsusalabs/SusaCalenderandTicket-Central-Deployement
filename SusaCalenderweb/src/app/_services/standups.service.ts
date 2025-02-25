@@ -10,7 +10,7 @@ export class StandupsService {
   constructor(private http: HttpClient) { }
 
   getStandups(){
-    return this.http.get<StandUps[]>("http://localhost:3000/api/standups/getall");
+    return this.http.get<StandUps[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/standups/getall");
   }
 
   getid(data : any){
@@ -18,23 +18,23 @@ export class StandupsService {
   }
 
   getdetails(data : any){
-    return this.http.get("http://localhost:3000/api/user/details/"+data);
+    return this.http.get("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/details/"+data);
   }
 
   addTaskinStandups(data){
-    return this.http.post("http://localhost:3000/api/standups/addtasks", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/standups/addtasks", data);
   }
 
   updateTaskinStandups(data){
-    return this.http.post("http://localhost:3000/api/standups/updateisCompleted", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/standups/updateisCompleted", data);
   }
 
   updatePopupdate(data, id){
     console.log(data, id);
-    return this.http.post(`http://localhost:3000/api/standups/update?id=${id}`, data);
+    return this.http.post(`https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/standups/update?id=${id}`, data);
   }
 
   addStandups(data){
-    return this.http.post("http://localhost:3000/api/standups/add", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/standups/add", data);
   }
 }

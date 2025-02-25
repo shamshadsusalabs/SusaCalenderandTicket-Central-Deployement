@@ -49,12 +49,12 @@ export class SignInService {
 
   logIn(cred){
     console.log(cred);
-    return this.http.post("http://localhost:3000/api/user/login", cred);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/login", cred);
   }
 
   signUp(cred){
     console.log(cred);
-    return this.http.post("http://localhost:3000/api/user/signup", cred);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/signup", cred);
   }
 
   signInWithGoogle(idToken){
@@ -69,19 +69,19 @@ export class SignInService {
   }
 
   getUsers(){
-    return this.http.get<User[]>("http://localhost:3000/api/user/getall");
+    return this.http.get<User[]>("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/getall");
   }
 
   verifyUser(data, id){
-    return this.http.post(`http://localhost:3000/api/user/update?id=${id}`, data);
+    return this.http.post(`https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/update?id=${id}`, data);
   }
 
   removeUser(data){
-    return this.http.post("http://localhost:3000/api/user/remove", data);
+    return this.http.post("https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/remove", data);
   }
 
   updatePassword(data, id){
-    return this.http.post(`http://localhost:3000/api/user/update?id=${id}`, data)
+    return this.http.post(`https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/user/update?id=${id}`, data)
   }
 
   removeUserFirebase(email: User){

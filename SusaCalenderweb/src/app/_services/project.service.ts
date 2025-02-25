@@ -15,7 +15,7 @@ projectID?:string;
   providedIn: 'root'
 })
 export class ProjectService {
-  private apiUrl = 'http://localhost:3000/api/Project'; // Base URL for the API
+  private apiUrl = 'https://susacalenderandticket-central-deployement-865099120788.asia-south1.run.app/api/Project'; // Base URL for the API
 
   constructor(private http: HttpClient) {}
 
