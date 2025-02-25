@@ -228,7 +228,7 @@ cron.schedule('0 17 * * 6', async () => {
 
 // Define root route
 app.get('/', (req, res) => {
-    res.json('Server is working');
+    res.json('Server is working 2 .0');
 }); 
 
 // Start the server
