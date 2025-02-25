@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="body mt-2">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Set Stand-ups Time">
+        <div class="first d-flex justify-content-center">
+          <table class="table mt-3" style="width: 600px;">
+            <thead>
+              <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Stand-ups Time</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.name }}</td>
+                <td style="font-weight: 700;" *ngIf="user.popupDate !== ''">
+                  {{ user.popupDate | date: 'shortTime' }}
+                </td>
+                <td *ngIf="user.popupDate === ''">No Time is Set</td>
+                <td (click)="openDialog(user)">
+                  <div class="edit">Edit</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Show All Stand-ups">
+        <div class="d-flex justify-content-center mt-3">
+          <button (click)="showAllStandups()" mat-raised-button color="primary">
+
+          </button>
+        </div>
+        <div class="container">
+          <div class="body mt-2">
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Event Schedule">
+                <div class="d-flex justify-content-center mt-3">
+                  <table class="table mt-3" style="width: 600px;">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let event of displayedEvents; index as i">
+                        <td>{{ (eventPageIndex * eventPageSize) + (i + 1) }}</td>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.details }}</td>
+                        <td>{{ event.start | date: 'short' }}</td>
+                        <td>{{ event.end | date: 'short' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Moved paginator directly below the table -->
+                <div class="d-flex justify-content-center">
+                  <mat-paginator #eventPaginator
+                    [length]="events.length"
+                    [pageSize]="eventPageSize"
+                    [pageSizeOptions]="[5, 10, 20]"
+                    (page)="onEventPageChange($event)">
+                  </mat-paginator>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- <mat-tab label="Retro" style="height: 900px;">
+        <div *ngIf="!showRetroToggle" class="second">
+          <h5 class="mt-3">See Stand-ups Retro Of:</h5>
+          <div class="row p-2">
+            <div *ngFor="let user of users" class="col-4 mt-3 d-flex justify-content-center">
+              <mat-card (click)="showRetro(user)" class="cards d-flex justify-content-center" style="background-color: rgba(191, 190, 190, 0.6); width: 100%;">
+                {{ user.name }}
+              </mat-card>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="showRetroToggle" class="second">
+          <div style="margin-left: 220px; margin-top: 10px; margin-bottom: 40px;">
+            <button (click)="showRetroToggle = false" color="warn" mat-mini-fab>
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+          </div>
+
+          <div *ngIf="dataSource.length !== 0">
+            <h5 style="margin-left: 226px; margin-bottom: 20px;">
+              Stand-ups Retro Of: <span style="font-weight: 700; font-size: 16px;">{{ currEmpName }}</span>
+            </h5>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <table *ngIf="dataSource.length !== 0" class="table mt-3" style="width: 850px;">
+              <thead>
+                <tr>
+                  <th scope="col">Sr No.</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">isCompleted?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of dataSource; index as i">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ data.title }}</td>
+                  <td>{{ data.description }}</td>
+                  <td>{{ data.date | date }}</td>
+                  <td *ngIf="data.isCompleted">Yes</td>
+                  <td *ngIf="!data.isCompleted">No</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div *ngIf="dataSource.length === 0" class="no-available d-flex justify-content-center align-items-center">
+              <h5>No Stand-Ups Data Available!</h5>
+            </div>
+          </div>
+        </div>
+      </mat-tab> -->
+    </mat-tab-group>
+  </div>
+</div>

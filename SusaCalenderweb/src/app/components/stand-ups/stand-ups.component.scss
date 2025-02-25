@@ -1,0 +1,32 @@
+.edit{
+    width: 50px; 
+    height: 20px; 
+    background-color: #673ab7; 
+    color: white;
+    border: 1px solid gray; 
+    border-radius: 5px; 
+    display: flex; 
+    justify-content: center; 
+    text-align: center; 
+    cursor: pointer;
+}
+.edit:hover{
+    background-color: purple;
+    color: black;
+}
+.cards{
+    background-color: gray;
+}
+.cards:hover{
+    cursor: pointer;
+    background-color: rgb(191, 188, 188);
+    opacity: 0.8;
+}
+.no-available{
+    width: 400px;
+    height: 80px;
+    background-color: rgb(86, 86, 86);
+    opacity: 0.7;
+    color: black;
+    border-radius: 5px;
+}

@@ -1,0 +1,136 @@
+.comment-section {
+  max-width: 800px; /* Increased width for a more spacious layout */
+  margin: 0 auto; /* Center the comment section */
+  padding: 15px; /* Increased padding for better spacing */
+  border: 1px solid #ddd; /* Light border for definition */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  background-color: #f7f7f7; /* Light background for contrast */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.comment {
+  display: flex;
+  flex-direction: column; /* Vertical layout for comments */
+  padding: 12px; /* Increased padding for each comment */
+  margin-bottom: 15px; /* Space between comments */
+  border-bottom: 1px solid #e0e0e0; /* Divider for clarity */
+}
+
+.comment p {
+  margin: 5px 0; /* Consistent spacing around text */
+  font-size: 16px; /* Slightly larger font size for readability */
+  line-height: 1.5; /* Improved line height for better readability */
+}
+
+.comment-author {
+  font-weight: bold; /* Bold author name */
+  color: #0078d4; /* Author name color */
+  font-size: 15px; /* Author name font size */
+  margin-bottom: 4px; /* Space below author name */
+}
+
+.comment-text {
+  font-size: 15px; /* Comment text size */
+  color: #333; /* Darker text color for contrast */
+}
+
+.replies {
+  padding-left: 25px; /* Space for replies */
+  margin-top: 10px; /* Space above replies */
+  background-color: #f1f1f1; /* Slightly different background for replies */
+  border-radius: 8px; /* Rounded corners for replies */
+  padding: 10px; /* Padding for replies */
+}
+
+.reply {
+  padding: 8px; /* Padding for each reply */
+  font-size: 14px; /* Font size for replies */
+  color: #555; /* Color for reply text */
+  border-bottom: 1px solid #e0e0e0; /* Divider for replies */
+}
+
+.reply p {
+  margin: 4px 0; /* Spacing for reply text */
+}
+
+.reply-author {
+  font-weight: bold; /* Bold reply author name */
+  color: #0078d4; /* Color for reply author */
+}
+
+.reply-input,
+.comment-input {
+  width: 100%; /* Full width inputs */
+  padding: 10px; /* Increased padding for inputs */
+  margin-top: 10px; /* Space above inputs */
+  border: 1px solid #ddd; /* Light border for inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
+  font-size: 14px; /* Font size for inputs */
+}
+
+.reply-button,
+.comment-button {
+  margin-top: 8px; /* Space above buttons */
+  padding: 8px 15px; /* Increased padding for buttons */
+  background-color: #0078d4; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 15px;
+  padding-left: 30px; /* Font size for buttons */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.reply-button:hover,
+.comment-button:hover {
+  background-color: #005bb5; /* Darker shade on hover */
+}
+
+/* Small Screen Adjustments */
+@media (max-width: 600px) {
+  .comment-section {
+    padding: 10px; /* Slightly reduced padding for small screens */
+  }
+
+  .comment,
+  .replies {
+    padding: 10px; /* Consistent padding */
+  }
+
+  .reply-input,
+  .comment-input {
+    font-size: 14px; /* Font size for inputs on small screens */
+  }
+}
+button.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button.btn-third {
+  margin-left: 20px;
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn-primary:hover,
+button.btn-secondary:hover {
+  opacity: 0.9;
+}

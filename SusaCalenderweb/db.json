@@ -1,0 +1,309 @@
+{
+  "eventDetails": [
+    {
+      "id": 1,
+      "title": "Prajay Mehta",
+      "start": "2022-02-09T09:30:00.000Z",
+      "end": "2022-02-10T12:30:00.000Z",
+      "color": "#ff9800",
+      "details": "Going for Movie"
+    },
+    {
+      "id": 2,
+      "title": "Prajay Mehta",
+      "start": "2022-02-18T18:30:00.000Z",
+      "end": "2022-02-20T17:30:00.000Z",
+      "color": "#ff9800",
+      "details": "Picnic"
+    },
+    {
+      "id": 3,
+      "title": "Khushi Kalathiya",
+      "start": "2022-02-02T09:30:00.000Z",
+      "end": "2022-02-02T12:30:00.000Z",
+      "color": "#f9483b",
+      "details": "Appointment with Doctor"
+    },
+    {
+      "id": 4,
+      "title": "Khushi Kalathiya",
+      "start": "2022-02-24T18:30:00.000Z",
+      "end": "2022-02-26T18:30:00.000Z",
+      "color": "#f9483b",
+      "details": "Weekend"
+    },
+    {
+      "id": 5,
+      "title": "Riya Chapatwala",
+      "start": "2022-02-03T18:30:00.000Z",
+      "end": "2022-02-05T18:30:00.000Z",
+      "color": "#03c5de",
+      "details": "Business Travel"
+    },
+    {
+      "id": 6,
+      "title": "Riya Chapatwala",
+      "start": "2022-02-27T18:30:00.000Z",
+      "end": "2022-02-28T18:30:00.000Z",
+      "color": "#03c5de",
+      "details": "End of Month - Holiday"
+    },
+    {
+      "id": 7,
+      "title": "Shivam Siddhapura",
+      "start": "2022-02-16T21:30:00.000Z",
+      "end": "2022-02-18T00:30:00.000Z",
+      "color": "green",
+      "details": "Yoga"
+    },
+    {
+      "id": 8,
+      "title": "Shivam Siddhapura",
+      "start": "2022-02-22T18:30:00.000Z",
+      "end": "2022-02-24T18:30:00.000Z",
+      "color": "green",
+      "details": "Anything"
+    }
+  ],
+  "assignees": [
+    "Shivam Siddhapura",
+    "Riya Chapatwala",
+    "Khushi Kalathiya",
+    "Prajay Mehta"
+  ],
+  "schedule": [
+    {
+      "title": "Prajay Mehta",
+      "color": "#ff9800",
+      "schedules": [
+        {
+          "start": "2022-02-09T09:30:00.000Z",
+          "end": "2022-02-10T12:30:00.000Z",
+          "details": "Going for Movie"
+        },
+        {
+          "start": "2022-02-18T18:30:00.000Z",
+          "end": "2022-02-20T17:30:00.000Z",
+          "details": "Picnic"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "title": "Khushi Kalathiya",
+      "color": "#f9483b",
+      "schedules": [
+        {
+          "start": "2022-02-02T09:30:00.000Z",
+          "end": "2022-02-02T12:30:00.000Z",
+          "details": "Appointment with Doctor"
+        },
+        {
+          "start": "2022-02-24T18:30:00.000Z",
+          "end": "2022-02-26T18:30:00.000Z",
+          "details": "Weekend"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "title": "Riya Chapatwala",
+      "color": "#03c5de",
+      "schedules": [
+        {
+          "start": "2022-02-03T18:30:00.000Z",
+          "end": "2022-02-05T18:30:00.000Z",
+          "details": "Business Travel"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "title": "Shivam Siddhapura",
+      "color": "green",
+      "schedules": [
+        {
+          "start": "2022-02-16T21:30:00.000Z",
+          "end": "2022-02-18T00:30:00.000Z",
+          "details": "Yoga"
+        },
+        {
+          "start": "2022-02-22T18:30:00.000Z",
+          "end": "2022-02-24T18:30:00.000Z",
+          "details": "Anything"
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "sharedschedules": [
+    {
+      "sendTo": "Prajay Mehta",
+      "scheduleOf": "Shivam Siddhapura",
+      "schedules": [
+        {
+          "start": "2022-02-16T21:30:00.000Z",
+          "end": "2022-02-18T00:30:00.000Z",
+          "details": "Yoga"
+        },
+        {
+          "start": "2022-02-22T18:30:00.000Z",
+          "end": "2022-02-24T18:30:00.000Z",
+          "details": "Anything"
+        }
+      ],
+      "sharedDate": "2022-02-28T06:19:55.531Z",
+      "id": 1
+    }
+  ],
+  "kanban": [
+    {
+      "id": 1,
+      "statusId": 1,
+      "statusName": "Under-Review"
+    },
+    {
+      "id": 2,
+      "statusId": 2,
+      "statusName": "Processing"
+    },
+    {
+      "id": 3,
+      "statusId": 3,
+      "statusName": "Completed"
+    },
+    {
+      "id": 4,
+      "statusId": 4,
+      "statusName": "End"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "orderNo": 2,
+      "totalItems": 11,
+      "company": "L&T",
+      "entryDate": "2021-06-13T18:30:00.000Z",
+      "followUpDate": "2021-06-23T18:30:00.000Z",
+      "expirationDate": "2022-06-12T18:30:00.000Z",
+      "totalCost": 5000,
+      "totalPrice": 850,
+      "contact": 7990565083,
+      "createdBy": "Company",
+      "salesPerson": "Anup Malik",
+      "priority": "Minimal",
+      "statusId": 1,
+      "index": 1
+    },
+    {
+      "id": 2,
+      "orderNo": 6,
+      "totalItems": 6,
+      "company": "Reliance",
+      "entryDate": "2020-04-06T18:30:00.000Z",
+      "followUpDate": "2020-05-07T18:30:00.000Z",
+      "expirationDate": "2022-05-06T18:30:00.000Z",
+      "totalCost": 4500,
+      "totalPrice": 1150,
+      "contact": 987920036,
+      "createdBy": "Third-Party",
+      "salesPerson": "Rakesh Patel",
+      "priority": "Minimal",
+      "statusId": 3,
+      "index": 1
+    },
+    {
+      "id": 3,
+      "orderNo": 12,
+      "totalItems": 10,
+      "company": "Essar",
+      "entryDate": "2021-07-01T18:30:00.000Z",
+      "followUpDate": "2021-07-12T18:30:00.000Z",
+      "expirationDate": "2021-10-06T18:30:00.000Z",
+      "totalCost": 15000,
+      "totalPrice": 7500,
+      "contact": "8792898728",
+      "createdBy": "Third-Party",
+      "salesPerson": "Amit Kapoor",
+      "priority": "High",
+      "statusId": 4,
+      "index": 0
+    },
+    {
+      "id": 6,
+      "orderNo": 12,
+      "totalItems": 21,
+      "company": "Amez",
+      "entryDate": "2021-08-07T18:30:00.000Z",
+      "followUpDate": "2021-10-07T18:30:00.000Z",
+      "expirationDate": "2022-08-06T18:30:00.000Z",
+      "totalCost": 25000,
+      "totalPrice": 20000,
+      "contact": "7763748989",
+      "createdBy": "Third-Party",
+      "salesPerson": "Sanjay Singhania",
+      "priority": "Moderate",
+      "statusId": 1,
+      "index": 0
+    },
+    {
+      "id": 7,
+      "orderNo": 12,
+      "totalItems": 67,
+      "company": "PXA",
+      "entryDate": "2021-08-06T18:30:00.000Z",
+      "followUpDate": "2021-08-13T18:30:00.000Z",
+      "expirationDate": "2022-08-05T18:30:00.000Z",
+      "totalCost": 75000,
+      "totalPrice": 70000,
+      "contact": "7763782909",
+      "createdBy": "Third-Party",
+      "salesPerson": "Ashish Patel",
+      "priority": "Moderate",
+      "statusId": 3,
+      "index": 0
+    },
+    {
+      "id": 4,
+      "orderNo": 56,
+      "totalItems": 12,
+      "company": "SID's Pvt Ltd",
+      "entryDate": "2021-07-01T18:30:00.000Z",
+      "followUpDate": "2021-08-01T18:30:00.000Z",
+      "expirationDate": "2022-08-01T18:30:00.000Z",
+      "totalCost": 15500,
+      "totalPrice": 7500,
+      "contact": "7363736789",
+      "createdBy": "Company",
+      "salesPerson": "Shivam Siddhapura",
+      "priority": "High",
+      "statusId": 2,
+      "index": 0
+    },
+    {
+      "id": 8,
+      "orderNo": 12,
+      "totalItems": 15,
+      "company": "BrowserTech",
+      "entryDate": "2022-03-02T18:30:00.000Z",
+      "followUpDate": "2022-03-03T18:30:00.000Z",
+      "expirationDate": "2022-03-08T18:30:00.000Z",
+      "totalCost": 1200,
+      "totalPrice": 2500,
+      "contact": "7748574878",
+      "createdBy": "Company",
+      "salesPerson": "Shivam Siddhapura",
+      "priority": "High",
+      "statusId": 1,
+      "index": 2
+    }
+  ],
+  "background": [
+    { "id": 1, "name": "https://wallup.net/wp-content/uploads/2016/01/230665-minimalism-simple-abstract.jpg" },
+    { "id": 2, "name": "http://media.idownloadblog.com/wp-content/uploads/2017/10/Accidental-Wallpaper-for-desktop-phlntn-guitrasher.jpg" },
+    { "id": 3, "name": "https://images.wallpapersden.com/image/download/spiral-shape-blue-abstract_a2lnaWuUmZqaraWkpJRsa21lrWloZ2U.jpg" },
+    { "id": 4, "name": "https://wallpapercave.com/wp/wp7895753.jpg" },
+    { "id": 5, "name": "https://www.pixelstalk.net/wp-content/uploads/2016/06/Abstract-Wallpaper-HD.png" }
+  ]
+}

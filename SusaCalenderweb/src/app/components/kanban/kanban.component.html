@@ -1,0 +1,269 @@
+<body [ngStyle]="{'background-image': 'url('+currImage+')'}" *ngIf="showUserKanbanToggle === false">
+    <div class="row pt-3 pe-3">
+        <div [ngClass]="[ currUser.userName === 'Rohit' ? 'col-12' : 'col-10' ]">
+
+          <div class="col-10 d-flex">
+            <button *ngIf="currUser.userName === 'Rohit'" class="ms-2" mat-raised-button color="primary" type="button">View Kanban Of: </button>
+            <button (click)="openBackground()" *ngIf="currUser.userName === 'Rohit'" class="ms-2" mat-raised-button color="primary" type="button">Background </button>
+          </div>
+
+          <div class="col-3" *ngIf="currUser.userName === 'Rohit'">
+            <button routerLink="/kanban-history" matTooltip="Show History" style="margin-top: 10px; margin-left: 6px;" mat-button mat-mini-fab color="accent">
+              <mat-icon class="col-white">history</mat-icon>
+            </button>
+            <button routerLink="/All-history" matTooltip="Show Tickets" style="margin-top: 10px; margin-left: 6px;" mat-button mat-mini-fab color="primary">
+              <mat-icon class="col-white">table_chart</mat-icon>
+            </button>
+
+          </div>
+
+          <div class="row p-2">
+            <div *ngFor="let user of users" class="col-4 mt-3 d-flex justify-content-center">
+              <mat-card (click)="viewUserKanban(user)" class="cards d-flex justify-content-center" style="background-color: rgb(191, 190, 190); background-color: opacity(0.6); width: 100%;">
+                {{ user.userName }}
+              </mat-card>
+            </div>
+          </div>
+
+          <button *ngIf="currUser.userName !== 'Rohit'" class="ms-2" mat-raised-button color="primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Share Kanban</button>
+          <mat-form-field style="color: white;" *ngIf="currUser.userName !== 'Rohit'" class="ms-2" color="secondary"  appearance="outline">
+            <mat-label style="color: rgb(161, 1, 161);">Change Background</mat-label>
+            <mat-select style="color: rgb(161, 1, 161);" (valueChange)="changeBackground($event)">
+              <mat-option style="color: rgb(161, 1, 161);" *ngFor="let back of backgroundPictures; index as i" [value]="back">
+                Theme {{i}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+              <h5 id="offcanvasRightLabel">Share Kanban To:</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <form (ngSubmit)="shareKanban(f.value)" #f="ngForm" [formGroup]="eventService.shareKanbanPerson">
+                <mat-radio-group formControlName="userName" style="display: block; width: 25%; margin-top: 15px; margin-left: 90px;">
+                    <mat-radio-button color="primary" style="margin-bottom: 5px;" *ngFor="let assignee of otherAssignes" [value]="assignee">
+                        {{ assignee }}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div style="margin-top: 10px;" class="example-button-row">
+                            <button style="width: 100%;" data-bs-dismiss="offcanvas" mat-raised-button color="primary" [disabled]="!f.valid"
+                                >Send</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="currUser.userName !== 'Rohit'" class="col-2">
+          <ul class="header-buttons d-flex align-items-center justify-content-end">
+            <li>
+              <div class="icon-button-demo px-1 d-flex align-items-center">
+
+                <button routerLink="/kanban-history" matTooltip="Show History" style="margin-right: 6px;" mat-button mat-mini-fab color="primary">
+                  <mat-icon class="col-white">history</mat-icon>
+                </button>
+
+
+                <button *ngIf="currUser.userName === 'Rohit'"  routerLink="/All-history" matTooltip="Show All History" style="margin-right: 6px;" mat-button mat-mini-fab color="primary">
+                  <mat-icon class="col-white">event_note</mat-icon> <!-- Use any suitable icon -->
+              </button>
+              <button routerLink="/user-All-history" matTooltip="Show All History" style="margin-right: 6px;" mat-button mat-mini-fab color="primary">
+                <mat-icon class="col-white">event_note</mat-icon> <!-- Use any suitable icon -->
+            </button>
+              <button  (click)="openProjectModal()" matTooltip="Add Project" style="margin-right: 6px;" mat-button mat-mini-fab color="primary" aria-label="Add Project">
+                <mat-icon class="col-white">assignment</mat-icon> <!-- Updated icon for projects -->
+              </button>
+                <button [matMenuTriggerFor]="menu" style="margin-right: 6px;" mat-mini-fab color="primary">
+                  <i style="font-size: 16px;" matBadgeColor="warn" matTooltip="Shared Kanban" matBadgeSize="small" [matBadge]="totalNotifications" class="fas fa-bell"></i>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                  <div class="header-component" style="cursor:default;" mat-menu-item>
+                    Recieved Kanban Of:
+                  </div>
+                  <div *ngIf="sharedKanban.length !== 0">
+                    <button (click)="viewSharedKanban(kanban)" class="mat-elevation-z8" style="background-color: rgb(228, 228, 228); border-radius: 5px;" mat-menu-item *ngFor="let kanban of sharedKanban">
+                      {{ kanban.statusName }}
+                    </button>
+                  </div>
+                  <div style="background-color: rgb(179, 178, 178); border-radius: 5px;" class="d-flex justify-content-center align-items-center" *ngIf="sharedKanban.length === 0">
+                    <h5 class="mt-2">No Shared Kanban!</h5>
+                  </div>
+                </mat-menu>
+
+                <button matTooltip="Add New" mat-button [matMenuTriggerFor]="options" mat-mini-fab color="primary">
+                  <mat-icon class="col-white">add</mat-icon>
+                </button>
+                <mat-menu   #options="matMenu" xPosition="after">
+                  <button (click)="addNew()" mat-menu-item>Add New Record</button>
+                  <button (click)="addNewKanban()" mat-menu-item>Add New Kanban</button>
+                </mat-menu>
+              </div>
+            </li>
+            <li>
+              <div class="icon-button-demo px-1">
+                  <button matTooltip="{{ removeKanbanToggle ? 'Click Here to Cancel Toggle Remove' : 'Click Here to Toggle Remove' }}" mat-mini-fab color="warn" (click)="toggleRemove()">
+                    <mat-icon class="col-white">{{ removeKanbanToggle ? 'close' : 'delete' }}
+                    </mat-icon>
+                  </button>
+                </div>
+            </li>
+          </ul>
+        </div>
+
+    </div>
+
+    <div *ngIf="kanban.length === 0" style="padding: 10px 0px 25px 0px; cursor: pointer;" class="kanbanheader scrolling-wrapper row flex-row flex-nowrap board-columns" cdkDropListGroup>
+        <div *ngFor="let row of category; index as i" style="margin-left: 2.5rem; margin-right: 1rem;" class="col-5 board" >
+          <div class="icon-button-demo remove-kanban m-l-10">
+              <mat-icon *ngIf="removeKanbanToggle" (click)="removeKanban(row)" style="cursor: pointer;" color="warn" class="col-red">cancel
+              </mat-icon>
+          </div>
+
+          <div class="board-column-title d-flex justify-content-center">
+            {{ row.statusName }}
+          </div>
+        </div>
+    </div>
+
+    <div *ngIf="kanban.length !== 0" style="padding: 10px 0px 25px 0px; cursor: pointer;" class="kanbanheader scrolling-wrapper row flex-row flex-nowrap board-columns" cdkDropListGroup>
+      <div *ngFor="let row of kanban; index as i" style="margin-left: 2.5rem; margin-right: 1rem;" class="col-5 board" >
+
+        <div class="icon-button-demo remove-kanban m-l-10">
+            <mat-icon *ngIf="removeKanbanToggle" (click)="removeKanban(category[i])" style="cursor: pointer;" color="warn" class="col-red">cancel
+            </mat-icon>
+        </div>
+
+        <div class="board-column-title d-flex justify-content-center">
+          {{ category[i].statusName }}
+        </div>
+        <div class="tasks-container"
+          cdkDropList
+          [cdkDropListData]="row"
+          (cdkDropListDropped)="drop($event)">
+          <div class="task" [ngClass]="{ 'completed': item.closingDate !== null}" *ngFor="let item of row" cdkDrag>
+
+            <div class="row">
+              <div class="col-10 d-flex align-items-center">
+                <mat-icon class="matermat-iconal-icons-two-tone color-icon">person</mat-icon>
+                <span style="margin-left: 7px;"> <b>{{ item.title }} (ID: #{{ item.ticketId }})</b> </span>
+              </div>
+              <div class="col-2 d-flex align-items-center">
+                <mat-icon [matMenuTriggerFor]="menu" class="setting matermat-iconal-icons-two-tone color-icon">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="editData(item)">
+                    <mat-icon class="material-icons-two-tone align-middle msr-2">create</mat-icon>
+                    <span>Edit Record</span>
+                  </button>
+                  <button mat-menu-item (click)="viewData(item)">
+                    <mat-icon class="material-icons-two-tone align-middle msr-2">expand_less</mat-icon>
+                    <span>View Record</span>
+                  </button>
+                </mat-menu>
+              </div>
+            <div>
+
+            </div>
+            </div>
+            <div style="margin-top: 5px;" class="row">
+              <div class="col-10 d-flex align-items-center">
+                <mat-icon class="material-icons-two-tone color-icon">bookmark</mat-icon>
+                <span style="margin-left: 7px; font-size: small;">  {{ item.description }}</span>
+              </div>
+              <div class="col-2">
+                <mat-icon matTooltip="Minimal Priority" *ngIf="item.priority === 'Minimal'" style="color: green;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+                <mat-icon matTooltip="Normal Priority" *ngIf="item.priority === 'Normal'" style="color: #00ffe4;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+                <mat-icon matTooltip="Moderate Priority" *ngIf="item.priority === 'Moderate'" style="color: yellow;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+                <mat-icon matTooltip="High Priority" *ngIf="item.priority === 'High'" style="color: orange;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+                <mat-icon matTooltip="Critical Priority" *ngIf="item.priority === 'Critical'" style="color: red;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+
+
+
+<body [ngStyle]="{'background-image': 'url('+currImage+')'}" *ngIf="showUserKanbanToggle === true">
+  <button class="ms-3 mt-3" (click)="showUserKanbanToggle = false" mat-raised-button color="warn"><mat-icon>keyboard_arrow_left</mat-icon>Back</button>
+  <div class="d-flex justify-content-center" *ngIf="userCategory.length === 0" >
+    <div class="d-flex justify-content-center align-items-center" style="background-color: rgb(223, 222, 222); width: 400px; height: 150px; border-radius: 5px; opacity: 0.8;">
+      <h5>No Kanban to Show!</h5>
+    </div>
+  </div>
+  <div *ngIf="userCategory.length !== 0" style="padding: 10px 0px 25px 0px;" class="kanbanheader scrolling-wrapper row flex-row flex-nowrap board-columns" cdkDropListGroup>
+
+    <div *ngFor="let row of userKanban; index as i" style="margin-left: 2.5rem; margin-right: 1rem;" class="col-5 board" >
+
+      <div class="icon-button-demo remove-kanban m-l-10">
+          <mat-icon *ngIf="removeKanbanToggle" (click)="removeKanban(category[i])" style="cursor: pointer;" color="warn" class="col-red">cancel
+          </mat-icon>
+      </div>
+
+      <div *ngIf="userCategory.length !== 0" class="board-column-title d-flex justify-content-center">
+        {{ userCategory[i].statusName }}
+      </div>
+
+      <div class="tasks-container"
+        cdkDropList
+        [cdkDropListData]="row"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task" [ngClass]="{ 'completed': item.closingDate !== null}" *ngFor="let item of row" cdkDrag>
+
+          <div class="row">
+            <div class="col-10 d-flex align-items-center">
+              <mat-icon class="matermat-iconal-icons-two-tone color-icon">person</mat-icon>
+              <span style="margin-left: 7px;"> <b>{{ item.title }} (ID: #{{ item.ticketId }})</b> </span>
+            </div>
+            <div class="col-2 d-flex align-items-center">
+              <mat-icon [matMenuTriggerFor]="menu" class="setting matermat-iconal-icons-two-tone color-icon">more_vert</mat-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editData(item)">
+                  <mat-icon class="material-icons-two-tone align-middle msr-2">create</mat-icon>
+                  <span>Edit Record</span>
+                </button>
+                <button mat-menu-item (click)="viewData(item)">
+                  <mat-icon class="material-icons-two-tone align-middle msr-2">expand_less</mat-icon>
+                  <span>View Record</span>
+                </button>
+              </mat-menu>
+            </div>
+          <div>
+
+          </div>
+          </div>
+          <div style="margin-top: 5px;" class="row">
+            <div class="col-10 d-flex align-items-center">
+              <mat-icon class="material-icons-two-tone color-icon">bookmark</mat-icon>
+              <span style="margin-left: 7px; font-size: small;">  {{ item.description }}</span>
+            </div>
+            <div class="col-2">
+              <mat-icon matTooltip="Minimal Priority" *ngIf="item.priority === 'Minimal'" style="color: green;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+              <mat-icon matTooltip="Normal Priority" *ngIf="item.priority === 'Normal'" style="color: #00ffe4;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+              <mat-icon matTooltip="Moderate Priority" *ngIf="item.priority === 'Moderate'" style="color: yellow;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+              <mat-icon matTooltip="High Priority" *ngIf="item.priority === 'High'" style="color: orange;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+              <mat-icon matTooltip="Critical Priority" *ngIf="item.priority === 'Critical'" style="color: red;" class="material-icons-two-tone color-icon">fiber_manual_record</mat-icon>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+
+
+
+

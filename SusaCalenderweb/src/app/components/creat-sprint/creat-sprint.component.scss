@@ -1,0 +1,69 @@
+/* Container Styling */
+.sprint-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+mat-card {
+  padding: 2rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+button {
+  width: 45%;
+}
+
+/* Form Input Styling */
+input[matInput] {
+  font-size: 1rem;
+}
+
+.mat-raised-button {
+  height: 3rem;
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .sprint-form-container {
+    max-width: 100%;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+.snackbar-success {
+  background-color: green; /* Set the background color to green */
+  color: white; /* Text color */
+  margin-top: 20px; /* Adjust spacing */
+}
+
+.snackbar-error {
+  background-color: red; /* Optional: Set error background color */
+  color: white; /* Text color */
+}

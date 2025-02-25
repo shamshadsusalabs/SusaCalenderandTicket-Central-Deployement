@@ -1,0 +1,20 @@
+<div class="container d-flex align-items-center mt-3">
+    <mat-icon class="mx-1">calendar_today</mat-icon>
+    Start Date:
+    <strong class="mx-1">{{ data.data.start | date:'medium'}}</strong> 
+</div>
+<div class="container d-flex align-items-center mt-3">
+    <mat-icon class="mx-1">calendar_today</mat-icon>
+    End Date:
+    <strong class="mx-1">{{ data.data.end | date:'medium'}}</strong> 
+</div>
+<div class="container d-flex align-items-center mt-3">
+    <mat-icon class="mx-1">supervisor_account</mat-icon>
+    Person Name:
+    <strong class="mx-1">{{ data.name }}</strong> 
+</div>
+<div class="container d-flex align-items-center mt-3">
+    <mat-icon class="mx-1">assessment</mat-icon>
+    Details: 
+    <strong class="mx-1">{{ data.data.extendedProps.details }}</strong> 
+</div>

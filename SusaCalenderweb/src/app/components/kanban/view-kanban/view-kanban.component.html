@@ -1,0 +1,43 @@
+<div class="header d-flex justify-content-center align-items-center p-3">
+    <div style="flex: 4; display: flex; justify-content: start;">
+        <h4>Kanban Of: <span>{{ data.sharedUserName }}</span> </h4>
+    </div>
+    
+    <div style="flex: 1; display: flex; justify-content: end;">
+        <button (click)="deleteKanban()" color="warn" mat-raised-button>Delete Schedule<i class="fas fa-eraser"></i></button>
+    </div>
+    
+</div>
+<div class="body">
+    <div style="padding: 10px 0px 25px 0px;" class="kanbanheader scrolling-wrapper row flex-row flex-nowrap board-columns"> 
+
+        <div *ngFor="let row of kanban; index as i" style="margin-left: 2.5rem; margin-right: 1rem;" class="col-5 board" >
+    
+          <div class="board-column-title d-flex justify-content-center">
+            {{ category[i].statusName }}
+          </div>
+          
+          <div class="tasks-container">
+            <div class="task" *ngFor="let item of row">
+    
+              <div class="row">
+                <div class="col-10 d-flex align-items-center">
+                  <mat-icon class="matermat-iconal-icons-two-tone color-icon">person</mat-icon>
+                  <span style="margin-left: 7px;"> <b>{{ item.title }}</b> </span>
+                </div>
+              <div>
+                  
+              </div>
+              </div>
+              <div style="margin-top: 5px;" class="row">
+                <div class="col-10 d-flex align-items-center">
+                  <mat-icon class="material-icons-two-tone color-icon">bookmark</mat-icon>
+                  <span style="margin-left: 7px; font-size: small;">  {{ item.description }}</span>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

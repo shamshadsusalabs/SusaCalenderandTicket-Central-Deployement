@@ -1,0 +1,82 @@
+<div class="sprint-form-container">
+  <form [formGroup]="sprintForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>Create Sprint</mat-card-title>
+      <mat-card-content>
+
+        <!-- Project Selector -->
+        <mat-form-field appearance="outline">
+          <mat-label>Project</mat-label>
+          <mat-select formControlName="project" placeholder="Select a project">
+            <mat-option *ngFor="let proj of projects" [value]="proj">
+              {{ proj.projectName }} ({{ proj.projectID }})
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sprintForm.get('project')?.invalid && sprintForm.get('project')?.touched">
+            Please select a project.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Start Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Select start date" />
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+          <mat-error *ngIf="sprintForm.get('startDate')?.invalid && sprintForm.get('startDate')?.touched">
+            Start date is required.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- End Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="endDate" placeholder="Select end date" />
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+          <mat-error *ngIf="sprintForm.get('endDate')?.hasError('required') && sprintForm.get('endDate')?.touched">
+            End date is required.
+          </mat-error>
+          <mat-error *ngIf="sprintForm.get('endDate')?.hasError('endDateInvalid') && sprintForm.get('endDate')?.touched">
+            End date must be after start date.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Tickets for the Week -->
+        <mat-form-field appearance="outline">
+          <mat-label>Tickets for the Week</mat-label>
+          <mat-select formControlName="tickets" multiple>
+            <mat-option *ngFor="let ticket of fetchedTickets" [value]="ticket.ticketId" [disabled]="totalHours + ticket.tickethours > 48">
+              {{ ticket.title }} ({{ ticket.tickethours }} hours)
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sprintForm.get('tickets')?.invalid && sprintForm.get('tickets')?.touched">
+            At least one ticket must be selected.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Resource Selector -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Select Resources</mat-label>
+          <mat-select formControlName="resources" multiple>
+            <mat-option *ngFor="let user of users" [value]="user._id">
+              {{ user.userName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sprintForm.get('resources')?.invalid && sprintForm.get('resources')?.touched">
+            At least one resource must be selected.
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- Display Total Hours -->
+        <div *ngIf="totalHours > 0" class="total-hours">
+          Total Hours: {{ totalHours }} / 48
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="sprintForm.invalid">Create Sprint</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

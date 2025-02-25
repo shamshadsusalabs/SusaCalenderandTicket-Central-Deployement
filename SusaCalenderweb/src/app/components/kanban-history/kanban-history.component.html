@@ -1,0 +1,192 @@
+<div *ngIf="currUser.userName !== 'Rohit'" class="body">
+    <div class="row ms-2 mt-2">
+        <div class="col-2">
+            <button routerLink="/kanban" mat-raised-button color="accent"> <mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mat-elevation-z8" style="width: 900px;">
+            <table mat-table matSort [width]="850" multiTemplateDataRows [dataSource]="dataSource">
+
+                <ng-container matColumnDef="title">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Title </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Creation Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.creationDate | date:'medium'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="closingDate">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Closing Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.closingDate | date:'medium'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticketDuration">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Duration</th>
+                    <td mat-cell *matCellDef="let element"> {{element.totalHours}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                      <div class="example-element-detail"
+                           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-diagram">
+                            <div class="example-element-name">
+                                <span data-width="18" data-height="18" class="iconify" data-icon="uil:user-nurse"></span>
+                                Person Name: <span style="font-size: 14px; font-weight: 700;">{{element.name}}</span>
+                            </div>
+                            <div class="example-element-title">
+                                <span class="iconify" data-icon="uil:tag-alt" data-width="18" data-height="18"></span>
+                                Ticket Title: <span style="font-size: 14px; font-weight: 700;">{{element.title}}</span>
+                            </div>
+                            <div class="example-element-title">
+                                <span class="iconify" data-icon="uil:tag-alt" data-width="18" data-height="18"></span>
+                                Ticket ID: <span style="font-size: 14px; font-weight: 700;">{{element.ticketId}}</span>
+                            </div>
+                            <div class="example-element-description">
+                                <span class="iconify" data-icon="uil:comment-alt-dots" data-width="18" data-height="18"></span>
+                                Ticket Description: <span style="font-size: 14px; font-weight: 700;">{{element.description}}</span>
+                            </div>
+                            <div class="example-element-creation">
+                                <span class="iconify" data-icon="ion:calendar-outline" data-width="18" data-height="18"></span>
+                                Ticket Creation Date: <span style="font-size: 14px; font-weight: 700;">{{element.creationDate | date}}</span>
+                            </div>
+                            <!-- <div class="example-element-creation">
+                                <span class="iconify" data-icon="ion:calendar-outline" data-width="18" data-height="18"></span>
+                                Ticket Progress Date: <span style="font-size: 14px; font-weight: 700;">{{element.progressDate | date}}</span>
+                            </div> -->
+                            <div class="example-element-closing">
+                                <span class="iconify" data-icon="ion:calendar" data-width="18" data-height="18"></span>
+                                Ticket Closing Date: <span style="font-size: 14px; font-weight: 700;">{{element.closingDate | date}}</span>
+                            </div>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns; index as i"
+                    class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+            </table>
+            <mat-paginator [length]="10"
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="currUser.userName === 'Rohit'" class="body">
+
+    <div *ngIf="!showKanbanHistoryToggle">
+        <div class="row ms-2 mt-2">
+            <div class="col-2">
+                <button routerLink="/kanban" mat-raised-button color="accent"> <mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+            </div>
+        </div>
+        <h5 style="margin-top: 25px; margin-left: 10px;">See Kanban History Of: </h5>
+        <div class="row p-2">
+            <div *ngFor="let user of users" class="col-4 mt-3 d-flex justify-content-center">
+              <mat-card (click)="getKanbanHistory(user)" class="cards d-flex justify-content-center" style="background-color: rgb(191, 190, 190); background-color: opacity(0.6); width: 100%;">
+                {{ user.userName }}
+              </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showKanbanHistoryToggle" class="row d-flex justify-content-center">
+        <div class="row ms-2 mt-2">
+            <div class="col-2">
+                <button routerLink="/kanban" mat-raised-button color="accent"> <mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+            </div>
+        </div>
+        <!-- <h5 style="margin-top: 25px; margin-left: 10px;">Kanban History Of:  </h5> -->
+        <div class="mat-elevation-z8" style="width: 900px;">
+            <table mat-table matSort [width]="850" multiTemplateDataRows [dataSource]="dataSource">
+
+                <ng-container matColumnDef="title">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Title </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Creation Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.creationDate | date:'medium'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="closingDate">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Closing Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.closingDate | date:'medium'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticketDuration">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Ticket Duration</th>
+                    <td mat-cell *matCellDef="let element"> {{element.totalHours}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                      <div class="example-element-detail"
+                           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-diagram">
+                            <div class="example-element-name">
+                                <span data-width="18" data-height="18" class="iconify" data-icon="uil:user-nurse"></span>
+                                Person Name: <span style="font-size: 14px; font-weight: 700;">{{element.name}}</span>
+                            </div>
+                            <div class="example-element-title">
+                                <span class="iconify" data-icon="uil:tag-alt" data-width="18" data-height="18"></span>
+                                Ticket Title: <span style="font-size: 14px; font-weight: 700;">{{element.title}}</span>
+                            </div>
+                            <div class="example-element-title">
+                                <span class="iconify" data-icon="uil:tag-alt" data-width="18" data-height="18"></span>
+                                Ticket ID: <span style="font-size: 14px; font-weight: 700;">{{element.ticketId}}</span>
+                            </div>
+                            <div class="example-element-description">
+                                <span class="iconify" data-icon="uil:comment-alt-dots" data-width="18" data-height="18"></span>
+                                Ticket Description: <span style="font-size: 14px; font-weight: 700;">{{element.description}}</span>
+                            </div>
+                            <div class="example-element-creation">
+                                <span class="iconify" data-icon="ion:calendar-outline" data-width="18" data-height="18"></span>
+                                Ticket Creation Date: <span style="font-size: 14px; font-weight: 700;">{{element.creationDate | date}}</span>
+                            </div>
+                            <!-- <div class="example-element-creation">
+                                <span class="iconify" data-icon="ion:calendar-outline" data-width="18" data-height="18"></span>
+                                Ticket Progress Date:
+                                <span *ngIf="element.progressDate !== null" style="font-size: 14px; font-weight: 700;">{{element.progressDate | date}}</span>
+                                <span *ngIf="element.progressDate === null" style="font-size: 14px; font-weight: 700;">No Record of it!</span>
+                            </div> -->
+                            <div class="example-element-closing">
+                                <span class="iconify" data-icon="ion:calendar" data-width="18" data-height="18"></span>
+                                Ticket Closing Date: <span style="font-size: 14px; font-weight: 700;">{{element.closingDate | date}}</span>
+                            </div>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns; index as i"
+                    class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+            </table>
+            <mat-paginator [length]="10"
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+</div>

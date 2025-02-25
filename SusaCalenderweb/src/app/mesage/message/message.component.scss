@@ -1,0 +1,273 @@
+.chat-container {
+  display: flex;
+  height: 75vh; /* Decreased height */
+  width: 90vw;  /* Increased width */
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.user-list {
+  width: 28%; /* Slightly wider sidebar for contact list */
+  background-color: #f0f0f0;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.user-list h2 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.user-list input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.user-list ul {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.user-list li {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.user-list li:hover, .user-list li.active {
+  background-color: #0c1e13; /* WhatsApp green */
+  color: white;
+}
+
+.chat-window {
+  width: 72%; /* Adjusted to complement user-list width */
+  display: flex;
+  flex-direction: column;
+  background-color: #e5ddd5;
+  position: relative;
+}
+
+.chat-window h2 {
+  font-size: 1.4rem; /* Further increased font size for chat header */
+  background-color: #075e54;
+  color: white;
+  padding: 15px;
+  margin: 0;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.5rem; /* Further increased font size for messages */
+}
+
+.message-input {
+  display: flex;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.message-input input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  font-size: 1.2rem; /* Further increased font size for input */
+}
+
+.message-input button {
+
+  background-color: #25d366; /* WhatsApp green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 25px;
+  font-size: 1.2rem; /* Further increased font size for button */
+}
+
+.message-input button:disabled {
+  background-color: #ccc;
+}
+
+/* Increased Font Size for Sent Messages */
+
+
+
+.message-time {
+  font-size: 1.1rem; /* Increased font size for time display */
+  color: #888; /* Gray color for the time */
+  text-align: right;
+  display: block;
+  margin-top: 5px;
+}
+
+.group-creation {
+  padding: 10px;
+  background-color: #e5ddd5; /* Light background for group creation */
+  border: 1px solid #ddd; /* Border around group creation section */
+  margin-top: 20px; /* Space above */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.group-creation h2 {
+  font-size: 1.5rem; /* Increased title font size */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.group-creation input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem; /* Font size */
+}
+
+/* Group Creation Button */
+.group-creation .btn.save {
+  background-color: #25d366; /* WhatsApp green */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 20px; /* Button padding */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s ease; /* Smooth background color change */
+}
+
+.group-creation .btn.save:hover {
+  background-color: #1ebd5f; /* Darker green on hover */
+}
+.sent {
+  background-color: #dcf8c6; /* Light green color for sent messages */
+  color: black; /* Text color */
+  padding: 7px; /* Padding inside the message bubble */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 20%; /* Limit the width of the bubble */
+  margin-left: auto; /* Align to the right */
+  margin-bottom: 5px; /* Space between messages */
+  position: relative;
+  /* For positioning the tail of the bubble */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Received Messages */
+.received {
+  background-color: #ffffff; /* White color for received messages */
+  color: black; /* Text color */
+  padding: 7px; /* Padding inside the message bubble */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 20%; /* Limit the width of the bubble */
+  margin-right: auto; /* Align to the left */
+  margin-bottom: 5px; /* Space between messages */
+  position: relative; /* For positioning the tail of the bubble */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Optional: Add a tail effect to the message bubbles */
+.sent::after,
+.received::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+/* Tail for Sent Messages */
+.sent::after {
+  border-top: 10px solid #dcf8c6; /* Color matching the sent bubble */
+  left: 100%; /* Positioning the tail on the right */
+  top: 10px; /* Aligning vertically with the message bubble */
+}
+
+/* Tail for Received Messages */
+.received::after {
+  border-top: 10px solid #ffffff; /* Color matching the received bubble */
+  right: 100%; /* Positioning the tail on the left */
+  top: 10px; /* Aligning vertically with the message bubble */
+}
+
+
+.sent1 {
+  background-color: #dcf8c6; /* Light green color for sent messages */
+  color: black; /* Text color */
+  padding: 7px; /* Padding inside the message bubble */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 20%; /* Limit the width of the bubble */
+  margin-left: auto; /* Align to the right */
+  margin-bottom: 5px; /* Space between messages */
+  position: relative;
+  /* For positioning the tail of the bubble */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Received Messages */
+.received1 {
+  background-color: #ffffff; /* White color for received messages */
+  color: black; /* Text color */
+  padding: 7px; /* Padding inside the message bubble */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 20%; /* Limit the width of the bubble */
+  margin-right: auto; /* Align to the left */
+  margin-bottom: 5px; /* Space between messages */
+  position: relative; /* For positioning the tail of the bubble */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Optional: Add a tail effect to the message bubbles */
+.sent1::after,
+.received1::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+/* Tail for Sent Messages */
+.sent1::after {
+  border-top: 10px solid #dcf8c6; /* Color matching the sent bubble */
+  left: 100%; /* Positioning the tail on the right */
+  top: 10px; /* Aligning vertically with the message bubble */
+}
+
+/* Tail for Received Messages */
+.received1::after {
+  border-top: 10px solid #ffffff; /* Color matching the received bubble */
+  right: 100%; /* Positioning the tail on the left */
+  top: 10px; /* Aligning vertically with the message bubble */
+}
+.message-content {
+  max-width: 100%; /* Set maximum width */
+  word-wrap: break-word; /* Ensure long words break to the next line */
+  overflow-wrap: break-word; /* Enable overflow wrapping */
+}
+
+.message-content a {
+  color: blue; /* Link color */
+  text-decoration: underline; /* Underline links */
+}

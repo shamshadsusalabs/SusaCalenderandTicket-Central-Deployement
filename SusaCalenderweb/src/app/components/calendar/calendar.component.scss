@@ -1,0 +1,56 @@
+.sidebar {
+  display: block;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+}
+.calendar {
+  border-radius: 5px;
+}
+mat-card:hover {
+  cursor: pointer;
+  background-color: rgb(170, 170, 170);
+  color: white;
+}
+.floating-window{
+  position: fixed;
+  z-index: 999;
+  right: 2%;
+  bottom: 3%;
+  border-radius: 5px;
+  height: 430px;
+  width: 600px;
+  background-color: rgb(180, 180, 180);
+  animation-duration: 2s;
+  animation-name: ani;
+}
+
+@keyframes ani{
+  from{
+    right: -25%;
+    bottom: -25%;
+    opacity: 0.4;
+  }
+  to{
+    right: 2%;
+  }
+}
+
+.col-3{
+  padding: 0px;
+  margin: 0px 5px ;
+  border-radius: 4px;
+  background: rgba(white, 0.7) ;
+  height: 320px;
+}
+// .col-3.Today{
+//   display: block;
+//   text-align: center;
+//   overflow-y: hidden;
+// }
+// .col-3.Tomorrow{
+//   display: block;
+//   text-align: center;
+//   overflow-y: hidden;
+// }

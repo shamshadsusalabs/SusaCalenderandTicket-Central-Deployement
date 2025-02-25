@@ -1,0 +1,81 @@
+span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .header {
+    background-color: rgb(146, 144, 144);
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+.body{
+    background-image: url("https://www.myfreetextures.com/wp-content/uploads/2014/11/Rich-Blue-Abstract-Background.jpg");
+    background-color: opacity(0.6);
+    height: 430px;
+    overflow: visible;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.view {
+    margin-top: 5px;
+  }
+  .board-columns {
+    // background: white;
+    border-radius: 5px;
+  }
+  .board {
+    // Child
+    height: 400px;
+    width: 270px;
+    background: rgba(white, 0.5);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px gray;
+    max-height: 600px;
+    position: relative;
+  }
+  li {
+    text-decoration: none;
+    list-style: none;
+  }
+  .setting {
+    cursor: pointer;
+  }
+  .setting:hover {
+    background-color: rgb(182, 180, 180);
+    border-radius: 50%;
+  }
+  .header-component:hover{
+    background-color: white;
+  }
+
+.kanbanheader {
+    overflow-x: auto;
+    position: absolute;
+    width: 97%;
+    align-items: center;
+  }
+  .board-columns {
+    // margin-top: 5rem;
+    max-height: 800px;
+  }
+  .board-column-title {
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+  
+  .tasks-container {
+    min-height: 150px;
+  }
+  
+  .task {
+    padding: 15px 10px;
+    background: white;
+    border-bottom: solid 1px black;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 5px -3px rgba(255, 255, 255, 0.924),
+      0 3px 14px 2px rgba(255, 255, 255, 0.924);
+  }
+  

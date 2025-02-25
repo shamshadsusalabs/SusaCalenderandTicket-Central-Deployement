@@ -1,0 +1,123 @@
+
+    <div class="d-flex justify-content-center align-items-center" style="height: 700px;">
+        <div *ngIf="toggleSignIn === true" [ngClass]="{ 'long': toggleSignIn === true }" class="main">
+            <div class="card-body">
+              <b class="card-title" style="text-align: center; text-decoration: underline;"><h4>SIGN IN</h4></b>
+              <form (ngSubmit)="onSignIn(f.value)" #f="ngForm" [formGroup]="signInService.signInForm">
+                
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-2" appearance="outline">
+                            <mat-label>E-Mail</mat-label>
+                            <input formControlName="userName" required matInput>
+                            <mat-error>E-Mail is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 93%;" class="example-full-width mb-2" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" [type]="togglePass ? 'password' : 'text'" required matInput>
+                            <mat-error>Password is Required</mat-error>
+                        </mat-form-field>
+                        <i matSuffix [matTooltip]="togglePass ? 'Show Password' : 'Hide Password' " class="fas" [ngClass]="[ togglePass ? 'fa-eye-slash' : 'fa-eye']" (click)="togglePassVisibility()"></i>
+                        <!-- <mat-icon style="cursor: pointer; padding-left: 6px;" (click)="any()">remove_red_eye_on</mat-icon>  -->
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 16px;">
+                    <div class="col">
+                        <a routerLink="/forgotpassword" style="color: rgb(114, 160, 252); cursor: pointer; ">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <div class="example-button-row">
+                            <button style="margin-right: 10px;" mat-raised-button color="primary" [disabled]="!f.valid"
+                                >Sign In</button>
+                            <button (click)="signInService.signInForm.reset()" mat-raised-button color="warn" type="button" tabindex="-1">Clear</button>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 d-flex justify-content-center">
+                        <div class="example-button-row">
+                            <!-- <button (click)="onGoogleSignIn()" type="button" mat-stroked-button color="warn"
+                                ><span style="color: black;">SignIn with Google</span> 
+                                <i class="fab fa-google"></i>
+                            </button> -->
+                            <button (click)="toggleSignIn = !toggleSignIn" type="button" mat-stroked-button color="warn">
+                                <span style="color: black;">Sign Up</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+              </form>
+            </div>
+        </div>
+
+        <div *ngIf="toggleSignIn === false" class="main-any">
+            <div class="card-body">
+              <b class="card-title" style="text-align: center; text-decoration: underline;"><h4>SIGN UP</h4></b>
+              <form (ngSubmit)="onSignUp(f.value)" #f="ngForm" [formGroup]="signInService.signUpForm">
+                
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-2" appearance="outline">
+                            <mat-label>Enter a Username</mat-label>
+                            <input formControlName="userName" required matInput>
+                            <mat-error>User-Name is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-2" appearance="outline">
+                            <mat-label>Enter a E-Mail</mat-label>
+                            <input formControlName="email" required matInput>
+                            <mat-error *ngIf="signInService.signUpForm.get('email').hasError('required')">E-Mail is Required</mat-error>
+                            <mat-error *ngIf="signInService.signUpForm.get('email').hasError('email')">E-Mail must be Valid!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 93%;" class="example-full-width mb-2" appearance="outline">
+                            <mat-label>Enter a Password</mat-label>
+                            <input formControlName="password" [type]="togglePass ? 'password' : 'text'" required matInput>
+                            <mat-error>Password is Required</mat-error>
+                        </mat-form-field>
+                        <i matSuffix [matTooltip]="togglePass ? 'Show Password' : 'Hide Password' " class="fas" [ngClass]="[ togglePass ? 'fa-eye-slash' : 'fa-eye']" (click)="togglePassVisibility()"></i>
+                        <!-- <mat-icon style="cursor: pointer; padding-left: 6px;" (click)="any()">remove_red_eye_on</mat-icon>  -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <div class="example-button-row">
+                            <button style="margin-right: 10px;" mat-raised-button color="primary" [disabled]="!f.valid"
+                                >Sign Up</button>
+                            <button (click)="signInService.signUpForm.reset()" mat-raised-button color="warn" type="button" tabindex="-1">Clear</button>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 d-flex justify-content-center">
+                        <div class="example-button-row">
+                            <button (click)="toggleSignIn = !toggleSignIn" type="button" mat-stroked-button color="warn">
+                                <span style="color: black;">Sign In</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+              </form>
+            </div>
+        </div>
+    </div>

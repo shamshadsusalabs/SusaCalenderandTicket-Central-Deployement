@@ -1,0 +1,64 @@
+<div *ngIf="currUser.userName !== 'Rohit'" class="container">
+    <div class="body d-flex justify-content-center">
+        <table class="table mt-3" style="width: 600px;">
+            <thead>
+              <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">Week Start Date</th>
+                <th scope="col">Week End Date</th>
+                <th scope="col">Active Time</th>
+                <th scope="col">Total Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of data; index as i">
+                <td>{{ i+1 }}</td>
+                <td>{{ user.start | date }}</td>
+                <td>{{ user.end | date }}</td>
+                <td>{{ user.totalHours }} Hours, {{ user.totalMinutes }} Minutes</td>
+                <td>25 hours</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="currUser.userName === 'Rohit'" class="container">
+
+    <div *ngIf="sprintToggle === false">
+        <h5>See Sprint of:</h5>
+        <div class="row p-2">
+            <div *ngFor="let user of assignes" class="col-4 mt-3 d-flex justify-content-center">
+              <mat-card (click)="seeSprint(user)" class="cards d-flex justify-content-center" style="background-color: rgb(191, 190, 190); background-color: opacity(0.6); width: 100%;">
+                {{ user }}
+              </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="sprintToggle === true">
+        <button (click)="sprintToggle = false" mat-raised-button color="accent"> <mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+        <div class="body d-flex justify-content-center">
+            <table class="table mt-3" style="width: 600px;">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr No.</th>
+                    <th scope="col">Week Start Date</th>
+                    <th scope="col">Week End Date</th>
+                    <th scope="col">Active Time</th>
+                    <th scope="col">Total Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of weeklySprints; index as i">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ user.start | date }}</td>
+                    <td>{{ user.end | date }}</td>
+                    <td>{{ user.totalHours }} Hours, {{ user.totalMinutes }} Minutes</td>
+                    <td>25 hours</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

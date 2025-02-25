@@ -1,0 +1,262 @@
+<div class="d-flex p-3">
+    <div class="calendar mat-elevation-z8 p-2" style="width: 91%;">
+        <div class="row">
+            <div *ngIf="currUser.userName === 'Rohit'" style="display: block; text-align: center;" class="col-2">
+
+                <div >
+                    <b>Subordinates</b>
+                    <div style="display: flex; justify-content: start; margin-top: 7px;" *ngFor="let filter of filters">
+                        <mat-checkbox [checked]="filter.checked" [value]="filter.value" color="primary"
+                            (change)="changeCategory($event, filter)">
+                            {{filter.value}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+
+            </div>
+            <div [ngClass]="[currUser.userName === 'Rohit' ? 'col-10' : 'col-12']">
+                <full-calendar [options]="calendarOptions"></full-calendar>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar ms-2 mat-elevation-z8">
+      <div style="margin-bottom: 5px;">
+        <button
+        *ngIf="currUser.userName !== 'Rohit'"
+          routerLink="/sprint-history"
+          color="primary"
+          mat-raised-button>
+          <mat-icon>history</mat-icon>Show Sprint History
+        </button>
+
+        <button
+        *ngIf="currUser.userName === 'Rohit'"
+          routerLink="/sprint-history-manager"
+          color="primary"
+          mat-raised-button>
+          <mat-icon>history</mat-icon>Show Sprint History
+        </button>
+      </div>
+
+        <div style="padding: 10px;" [hidden]="showSchedules" [hidden]="share" *ngIf="dateClicked">
+            <h5>Add Event</h5>
+
+            <form (ngSubmit)="addEvent(f.value)" #f="ngForm" class="register-form m-4" [formGroup]="eventService.addEventForm">
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field *ngIf="currUser.userName === 'Rohit'" style="width: 100%;" class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Person Name</mat-label>
+                            <mat-select formControlName="title" required>
+                            <mat-option *ngFor="let assignee of assignees" [value]="assignee">
+                                {{ assignee }}
+                            </mat-option>
+                            </mat-select>
+                            <mat-error>Select one Assignee</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Start Date</mat-label>
+                            <input matInput formControlName="start" [owlDateTimeTrigger]="start" [owlDateTime]="start"
+                            placeholder="Choose a date" required>
+                            <mat-icon matSuffix [owlDateTimeTrigger]="start" class="date-icon">today</mat-icon>
+                            <owl-date-time #start></owl-date-time>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-3" appearance="outline">
+                            <mat-label>End Date</mat-label>
+                            <input matInput formControlName="end" [owlDateTimeTrigger]="end" [owlDateTime]="end"
+                            placeholder="Choose a date" required>
+                            <mat-icon matSuffix [owlDateTimeTrigger]="end" class="date-icon">today</mat-icon>
+                            <owl-date-time #end></owl-date-time>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <mat-form-field style="width: 100%;" class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Details</mat-label>
+                            <textarea formControlName="details" required matInput></textarea>
+                            <mat-error>Detail is Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div style="flex: 1;" class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+                        <div class="example-button-row">
+                            <button style="margin-right: 10px;" mat-raised-button color="primary" [disabled]="!f.valid"
+                                >Save</button>
+                            <button (click)="clearForm()" mat-raised-button color="warn" type="button" tabindex="-1">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div style="padding: 10px; " *ngIf="eventClicked" [hidden]="showSchedules" [hidden]="share">
+            <h5>Event Details</h5>
+            <div class="container d-flex align-items-center mt-3">
+                <mat-icon class="mx-1">calendar_today</mat-icon>
+                Start Date:
+                <strong class="mx-1">{{ currentEventData.start | date:'medium'}}</strong>
+            </div>
+            <div class="container d-flex align-items-center mt-3">
+                <mat-icon class="mx-1">calendar_today</mat-icon>
+                End Date:
+                <strong class="mx-1">{{ currentEventData.end | date:'medium'}}</strong>
+            </div>
+            <div class="container d-flex align-items-center mt-3">
+                <mat-icon class="mx-1">supervisor_account</mat-icon>
+                Person Name:
+                <strong class="mx-1">{{ currentEventData.title }}</strong>
+            </div>
+            <div class="container d-flex align-items-center mt-3">
+                <mat-icon class="mx-1">assessment</mat-icon>
+                Details:
+                <strong class="mx-1">{{ currentEventData.extendedProps.details }}</strong>
+            </div>
+            <div class="buttons mt-3">
+                <button class="mx-2" (click)="deleteEvent(currentEventData)" color="warn" mat-raised-button>Delete</button>
+                <!-- <button (click)="editEvent(currentEventData)" color="accent" mat-raised-button>Edit</button> -->
+            </div>
+        </div>
+
+        <div *ngIf="share" [hidden]="showSchedules" class="d-block text-align-center">
+            <div style="padding: 10px; border: 3px solid gray; border-radius: 10px; height: 700px;">
+                <b style="margin-bottom: 10px;"><h5>Share Your Schedule To:</h5></b>
+                <form (ngSubmit)="shareSchedule(f.value)" #f="ngForm" [formGroup]="eventService.sharePersonName">
+                    <mat-radio-group formControlName="assigneeName" style="display: block; width: 15%; margin-left: 70px; margin-top: 15px;">
+                        <mat-radio-button color="primary" style="margin-bottom: 5px;" *ngFor="let assignee of otherAssignes" [value]="assignee">
+                            {{ assignee }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div style="margin-top: 10px;" class="example-button-row">
+                                <button style="width: 100%;" mat-raised-button color="primary" [disabled]="!f.valid"
+                                    >Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="showSchedules" [hidden]="share" class="d-block text-align-center">
+            <div style="padding: 10px; border: 3px solid gray; border-radius: 10px; height: 700px;">
+                <b><h5>You've recieved the Schedules Of:</h5></b>
+                <mat-card class="my-2" (click)="openSharedSchedule(schedule)" *ngFor="let schedule of GetSharedSchedules">
+                    <div>
+                        <p>Schedule Of: <b>{{ schedule.scheduleOf }}</b> </p>
+                        <p>Shared Date: <b>{{ schedule.sharedDate | date:'medium' }}</b></p>
+                    </div>
+                </mat-card>
+                <div style="margin-top: 30px;" *ngIf="emptySharedSchedules === true">
+                    <span style="color: gray; font-size: 14px;">No Schedules is Shared!</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="currUser.userName !== 'Rohit'">
+    <div *ngIf="popup">
+        <div [hidden]="standupsCompleted" class="floating-window mat-elevation-z8">
+            <div class="header d-flex justify-content-center mt-3">
+               <mat-icon>business_center</mat-icon>
+               <h2>Std-ups</h2>
+            </div>
+            <div class="body mt-2">
+               <form #f="ngForm" (ngSubmit)="addStandUps(f.value)" [formGroup]="standupForm">
+                   <div class="row d-flex justify-content-center">
+                       <div style="font-weight: 700;" class="col-3">
+                           <div class="row">
+                               <div style="font-weight: 700;" class="col d-flex justify-content-center">
+                                   Yesterday ({{ yesterday | date }})
+                               </div>
+                           </div>
+                           <div class="row mt-3">
+                               <div style="font-weight: 500;" class="col d-flex justify-content-center">
+                                   Ticket:
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col d-flex justify-content-center">
+                                   {{ yesterdayTaskTitle}}
+                               </div>
+                           </div>
+                           <div class="row mt-3">
+                               <div style="font-weight: 500;" class="col d-flex justify-content-center">
+                                   Ticket Description:
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col d-flex justify-content-center">
+                                   {{ yesterdayTaskDescription}}
+                               </div>
+                           </div>
+                           <div style="margin-top: 25px;" class="row">
+                               <div class="col d-flex justify-content-center">
+                                   <mat-checkbox color="primary" (change)="toggleCompleted($event.checked)" class="example-margin">Completed</mat-checkbox>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="Today col-3">
+                           <div class="row">
+                               <div style="font-weight: 700;" class="col d-flex justify-content-center">
+                                   Today ({{ today | date }})
+                               </div>
+                           </div>
+                           <div class="mt-2">
+                               <mat-form-field style="width: 150px; margin-left: 3px;" class="example-full-width" appearance="outline">
+                                   <mat-label>Add Title</mat-label>
+                                   <input type="text" formControlName="todayTitle" matInput>
+                               </mat-form-field>
+                               <mat-form-field style="width: 150px; margin-left: 3px;" class="example-full-width" appearance="outline">
+                                   <mat-label>Add Description</mat-label>
+                                   <textarea formControlName="todayDescription" rows="13" cols="20" matInput></textarea>
+                               </mat-form-field>
+                           </div>
+                       </div>
+                       <div class="Tomorrow col-3">
+                           <div class="row">
+                               <div style="font-weight: 700;" class="col d-flex justify-content-center">
+                                   Tomorrow ({{ tomorrow | date }})
+                               </div>
+                           </div>
+                           <div class="mt-2">
+                               <mat-form-field style="width: 150px; margin-left: 3px;" class="example-full-width" appearance="outline">
+                                   <mat-label>Add Title</mat-label>
+                                   <input type="text" formControlName="tomorrowTitle" matInput>
+                               </mat-form-field>
+                               <mat-form-field style="width: 150px; margin-left: 3px;" class="example-full-width" appearance="outline">
+                                   <mat-label>Add Description</mat-label>
+                                   <textarea formControlName="tomorrowDescription" rows="13" cols="20" matInput></textarea>
+                               </mat-form-field>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row mt-3">
+                       <div class="col-11 d-flex justify-content-end">
+                           <button mat-raised-button color="primary">Submit</button>
+                       </div>
+                   </div>
+               </form>
+            </div>
+       </div>
+    </div>
+</div>
+

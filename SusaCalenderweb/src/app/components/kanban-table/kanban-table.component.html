@@ -1,0 +1,119 @@
+<div *ngIf="currUser.userName === 'Rohit'" class="body">
+    <div class="row ms-2 mt-2">
+        <div class="col-2">
+            <button routerLink="/kanban" mat-raised-button color="accent"> <mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="container d-flex justify-content-center mb-3">
+                <h3>Ticket Details</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="container" style="margin-left: 105px;">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Search</mat-label>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input matInput [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text">
+                    <button matSuffix *ngIf="searchKey" (click)="onSearchClear()" mat-icon-button aria-label="Close dialog">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div>
+                <table mat-table [width]="1500" matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="srno">
+                      <th style="text-align: start; width: 50px;" mat-header-cell *matHeaderCellDef> Sr No. </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element; index as i"> {{i+1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ticektno">
+                      <th mat-sort-header style="text-align: start; width: 100px;" mat-header-cell *matHeaderCellDef> Ticket No. </th>
+                      <td style="text-align: center;" mat-cell *matCellDef="let element"> {{element.ticketId}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="title">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Title </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Description </th>
+                      <td style="text-align: start; width: 220px;" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Person Name </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="creationDate">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Creation Date </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.creationDate | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="closingDate">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Closing Date </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.closingDate | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="priority">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Priority </th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.priority}} </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="projectID">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Project ID</th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.projectID}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="resources">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Resources</th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.resources}} </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="tickethours">
+                      <th mat-sort-header style="text-align: start;" mat-header-cell *matHeaderCellDef> Tickethours</th>
+                      <td style="text-align: start;" mat-cell *matCellDef="let element"> {{element.tickethours}} </td>
+                    </ng-container>
+                  <!-- Action Column -->
+                  <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: start;"> Action </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: start;">
+                        <div style="display: flex; flex-direction: column;">
+                            <button mat-raised-button color="primary" (click)="openCommentModal(element.ticketId)" class="action-button" style="margin-bottom: 5px;">
+                                Add Comment
+                            </button>
+                            <button mat-raised-button color="accent" (click)="toggleComments(element._id)" class="action-button">
+                                View Comment
+                            </button>
+                        </div>
+                        <div *ngIf="isCommentsVisible[element._id]">
+                          <div *ngFor="let comment of element.comment">
+                              <div class="comment">
+                                  <strong>{{ comment.userName }}</strong>: {{ comment.comment }}
+                              </div>
+                          </div>
+                      </div>
+                    </td>
+                </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </div>
+
+</div>

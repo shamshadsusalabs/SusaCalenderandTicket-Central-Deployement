@@ -1,0 +1,300 @@
+<body >
+    <div *ngIf="action == 'newKanban'" class="addContainer">
+        <div class="modalHeader d-flex align-items-center">
+            <div style="flex: 7;" class="contact-details-name d-flex align-items-center">
+                <h5><b style="font-size: 18px;">New kanban</b> </h5>
+                <div style="margin-left: 6px;" class="badge rounded-pill bg-success mb-2">New</div>
+            </div>
+            <button style="flex: 1;" mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <div mat-dialog-content>
+          <form #f="ngForm" [formGroup]="tasksService.kanbanForm" (ngSubmit)="onSubmit(f.value)">
+
+
+
+            <div style="margin-top: 20px;" class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-label>Kanban-Field Name</mat-label>
+                  <input required matInput formControlName="statusName" >
+                  <mat-icon class="material-icons-two-tone color-icon" matSuffix>contacts</mat-icon>
+                  <mat-error *ngIf="tasksService.kanbanForm.get('statusName').hasError('required')">
+                    Field Name is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2 d-flex justify-content-center">
+                  <button mat-raised-button color="primary" style="width: 75%;" type="submit" [disabled]="f.invalid"
+                    >Save</button>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2 d-flex justify-content-center">
+                <button mat-raised-button color="warn" style="width: 75%;" type="button" (click)="dialogRef.close()" tabindex="-1">Cancel</button>
+              </div>
+          </div>
+
+          </form>
+        </div>
+    </div>
+
+    <div *ngIf="action == 'view'" class="addContainer">
+      <div class="modalHeader d-flex align-items-center mb-3">
+          <div style="flex: 16;"  class="contact-details-name d-flex align-items-center">
+              <div style="margin-left: 6px;" class="badge rounded-pill bg-info mb-2">Info</div>
+          </div>
+          <button style="flex: 1;" mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+              <mat-icon>close</mat-icon>
+          </button>
+      </div>
+      <div mat-dialog-content>
+        <mat-card-content>
+
+
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">person</mat-icon>
+              <div class="contact-detail-info">Project Owner <span style="font-weight: bold;"> {{ data.task.projectOwner }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">person</mat-icon>
+              <div class="contact-detail-info">Ticket hours <span style="font-weight: bold;"> {{ data.task.tickethours }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">person</mat-icon>
+              <div class="contact-detail-info">Title <span style="font-weight: bold;"> {{ data.task.title }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class=" view material-icons-two-tone color-icon">assignment_turned_in</mat-icon>
+              <div class="contact-detail-info">Description: <span style="font-weight: bold;"> {{ data.task.description }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">add_a_photo</mat-icon>
+              <div class="contact-detail-info">Image:
+                <button (click)="openImage(data.task.imageURL)" class="btn btn-primary">View Image</button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">timeline</mat-icon>
+              <div class="contact-detail-info">Priority: <span style="font-weight: bold;"> {{ data.task.priority }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">date_range</mat-icon>
+              <div class="contact-detail-info">Ticket Creation: <span style="font-weight: bold;"> {{ data.task.creationDate | date:'medium' }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">date_range</mat-icon>
+              <div class="contact-detail-info">Ticket Progress:
+                <span *ngIf="data.task.progressDate !== null" style="font-weight: bold;"> {{ data.task.progressDate | date:'medium' }}</span>
+                <span *ngIf="data.task.progressDate === null" style="font-weight: bold;"> Ticket is in To Do</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">update</mat-icon>
+              <div class="contact-detail-info">Ticket Last Modified:
+                <span *ngIf="data.task.modifiedDate !== null" style="font-weight: bold;"> {{ data.task.modifiedDate | date:'medium' }}</span>
+                <span *ngIf="data.task.modifiedDate === null" style="font-weight: bold;"> Ticket is not Modified yet</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center">
+              <mat-icon class="view material-icons-two-tone color-icon">cancel</mat-icon>
+              <div class="contact-detail-info">Ticket Closing Date:
+                <span *ngIf="data.task.closingDate !== null" style="font-weight: bold;"> {{ data.task.closingDate | date:'medium' }}</span>
+                <span *ngIf="data.task.closingDate === null" style="font-weight: bold;"> Ticket Not Yet Closed!</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;" class="contact-details-field row">
+            <div class="col-12 d-flex align-items-center justify-content-end">
+              <button (click)="closeTicket(data.task)" mat-raised-button color="primary">Close Ticket <mat-icon class="view material-icons-two-tone color-icon">done</mat-icon></button>
+            </div>
+          </div>
+        </mat-card-content>
+      </div>
+    </div>
+
+    <div *ngIf="action == 'new' || action == 'edit'" class="addContainer">
+      <div class="modalHeader d-flex align-items-center">
+          <div style="flex: 16; margin-left: 20px;"  class="contact-details-name d-flex align-items-center">
+              <mat-icon class="mb-2">event</mat-icon>
+              <h5><b style="font-size: 18px;">{{ dialogTitle }}</b> </h5>
+              <div style="margin-left: 6px;" class="badge rounded-pill mb-2" [ngClass]="[ action === 'edit' ? 'bg-secondary' : 'bg-success' ]">{{ action === 'edit' ? 'Edit' : 'New' }}</div>
+          </div>
+          <button style="flex: 1;" mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+              <mat-icon>close</mat-icon>
+          </button>
+      </div>
+
+      <div mat-dialog-content>
+        <form class="register-form m-4" #f="ngForm" [formGroup]="tasksService.tasksForm" (ngSubmit)="onSubmit(f.value)">
+          <div class="row">
+
+            <div class="col">
+              <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                <mat-label>Select Sprint</mat-label>
+                <!-- Directly send the selected sprintId to the TypeScript function -->
+                <mat-select (selectionChange)="onSprintSelect($event)"  formControlName="sprintId" >
+                  <mat-option *ngFor="let sprint of sprints" [value]="sprint.sprintId" >
+                    {{ sprint.sprintId }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                <mat-label>Select Project</mat-label>
+                <!-- Directly send the selected sprintId to the TypeScript function -->
+                <mat-select (selectionChange)="  onprojectSelect($event)"  formControlName="projectId" >
+                  <mat-option *ngFor="let project of  projects" [value]="project.projectID"  >
+                    {{ project.projectID}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="example-full-width" style="width: 100%;">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="Open">Open</mat-option>
+                <mat-option value="Close">Close</mat-option>
+                <mat-option value="In Progress">In Progress</mat-option>
+                <mat-option value="Dependency">Dependency</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+              <mat-label>Ticket Owner</mat-label>
+              <input type="text" required matInput formControlName="projectOwner" >
+              <mat-icon class="material-icons-two-tone color-icon" matSuffix>person</mat-icon>
+              <mat-error *ngIf="tasksForm.get('projectOwner').hasError('required')">
+                Ticket Owner is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+      </div>
+
+            <div class="row">
+                <div class="col">
+                  <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input type="text" required matInput formControlName="title" >
+                    <mat-icon class="material-icons-two-tone color-icon" matSuffix>person</mat-icon>
+                    <mat-error *ngIf="tasksForm.get('title').hasError('required')">
+                      Title is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input type="text" required matInput formControlName="description" >
+                  <mat-icon class="material-icons-two-tone color-icon" matSuffix>assignment_turned_in</mat-icon>
+                  <mat-error *ngIf="tasksForm.get('description').hasError('required')">
+                    Description is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-label>Ticket Hours</mat-label>
+                  <input type="number" required matInput formControlName="tickethours" >
+                  <mat-icon class="material-icons-two-tone color-icon" matSuffix>assignment_turned_in</mat-icon>
+                  <mat-error *ngIf="tasksForm.get('tickethours').hasError('required')">
+                    Ticket hours is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9">
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-label>Image URL (Optional)</mat-label>
+                  <input [(ngModel)]="photo" type="text" matInput formControlName="imageURL" >
+                  <mat-icon class="material-icons-two-tone color-icon" matSuffix>add_a_photo</mat-icon>
+                </mat-form-field>
+              </div>
+              <div style="padding-left: 15px;" class="col-3 mb-3 d-flex align-items-center">
+                <input (change)="uploadImage($event)" type="file">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-label>Priority</mat-label>
+                  <mat-select formControlName="priority">
+                    <mat-option  *ngFor="let priority of priorities" [value]="priority">
+                      {{priority}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon class="material-icons-two-tone color-icon" matSuffix>timeline</mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 mb-2">
+                  <div class="example-button-row">
+                    <button class="mx-2" mat-raised-button color="primary" type="submit" [disabled]="f.invalid"
+                      >Save</button>
+                    <button mat-raised-button color="warn" type="button" (click)="dialogRef.close()" tabindex="-1">Cancel</button>
+                    <button *ngIf="action === 'edit'" class="mx-2" matTooltip="Delete Record" type="button" mat-mini-fab color="warn" (click)="deleteRecord()">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <img width="75px" height="75px" [src]="photo">
+                </div>
+            </div>
+
+        </form>
+      </div>
+
+    </div>
+</body>
+
+
+

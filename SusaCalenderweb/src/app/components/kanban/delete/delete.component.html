@@ -1,0 +1,33 @@
+<div *ngIf="action === 'deleteKanban'" class="container">
+    <h4 class="d-flex justify-content-center align-items-center" mat-dialog-title>Are you sure, You want to delete this Kanban Field?</h4>
+    <div mat-dialog-actions class="mb-1">
+      <button class="d-flex justify-content-center" mat-flat-button color="warn" style="width: 100%;" (click)="deleteKanban()">
+        Delete
+      </button>
+      <button class="d-flex justify-content-center" mat-flat-button style="width: 100%;" (click)="dialogRef.close()" type="button" tabindex="-1">Cancel</button>
+    </div>
+</div>
+
+<div *ngIf="action === 'deleteRecord'" class="container">
+    <h3 class="d-flex justify-content-center" mat-dialog-title>Are you sure, You want to delete this?</h3>
+    <div mat-dialog-content>
+      <ul class="clearfix">
+        <li>
+          <p class="d-flex justify-content-center">
+            Title:<span style="margin-left: 5px;" class="fw-bold">{{data.row.title}} </span>
+            </p>
+        </li>
+        <li>
+          <p class="d-flex justify-content-center">
+            Description:<span style="margin-left: 5px;" class="fw-bold"> {{ data.row.description }}</span>
+            </p>
+        </li>
+      </ul>
+      <div mat-dialog-actions class="mb-1">
+        <button class="d-flex justify-content-center" mat-flat-button color="warn" style="width: 100%;" (click)="deleteTask()">
+          Delete
+        </button>
+        <button class="d-flex justify-content-center" mat-flat-button style="width: 100%;" (click)="dialogRef.close()" type="button" tabindex="-1">Cancel</button>
+      </div>
+    </div>
+</div>

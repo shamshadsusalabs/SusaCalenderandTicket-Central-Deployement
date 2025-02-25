@@ -1,0 +1,102 @@
+<div [hidden]="currRoute === 'kanban-table'">
+  <header *ngIf="currRoute !== 'kanban-history'" class="d-flex align-items-center bg-dark text-white" style="height: 60px;">
+    <div class="container">
+      <div style="flex: 2;" class="d-flex align-items-center">
+
+          <div class="d-flex align-items-center">
+
+              <a routerLink="/dashboard" style="font-size: 15px;" class="nav-link px-2 text-white">{{ currUser }}</a>
+              <div *ngIf="currUser !== 'Rohit'">
+                <a [hidden]="!toggleMode"  (click)="toggleShare()" style="font-size: 15px; cursor: pointer;" *ngIf="loggedIn" class="nav-link share px-2">
+                  {{ share ? 'Cancel' : 'Share Schedule'}}
+                </a>
+              </div>
+
+              <!-- *ngIf="currUser === 'Rohit'" -->
+              <div *ngIf="currRoute !== 'stand-ups'">
+                <a (click)="toggleMode = !toggleMode" *ngIf="loggedIn" [routerLink]="[toggleMode ? '/kanban' : '/dashboard']"  style="font-size: 15px; cursor: pointer;" class="nav-link share px-2">
+                  {{ toggleMode ? 'Kanban' : 'Dashboard' }}
+                </a>
+              </div>
+              <div     >
+                <a  *ngIf="loggedIn" routerLink="/create-history"  style="font-size: 15px; cursor: pointer;" class="nav-link share px-2">
+                  create sprint
+                </a>
+              </div>
+              <div   *ngIf="currUser == 'Rohit'"   >
+                <a  *ngIf="loggedIn" routerLink="/Admin-kanban"  style="font-size: 15px; cursor: pointer;" class="nav-link share px-2">
+                  create kanban
+                </a>
+              </div>
+
+              <div   *ngIf="currUser !== 'Rohit'"   >
+                <a  *ngIf="loggedIn" routerLink="/backlogs"  style="font-size: 15px; cursor: pointer;" class="nav-link share px-2">
+                  Backlogs
+                </a>
+              </div>
+              <div   *ngIf="currUser === 'Rohit'"   >
+                <a  *ngIf="loggedIn" routerLink="/Allbacklogs"  style="font-size: 15px; cursor: pointer;" class="nav-link share px-2">
+                  Backlogs
+                </a>
+              </div>
+
+          </div>
+
+          <div style="flex: 1;" class="d-flex align-items-center justify-content-end">
+            <div *ngIf="currUser !== 'Rohit'">
+              <i [hidden]="!toggleMode" (click)="toggleShowSchedules()" matBadgeColor="warn" matTooltip="Shared Schedules" matBadgeSize="small" *ngIf="loggedIn" [matBadge]="totalNotifications" class="fas fa-bell"></i>
+            </div>
+
+            <div *ngIf="currUser === 'Rohit'">
+              <div routerLink="/stand-ups" *ngIf="currRoute !== 'stand-ups'" matTooltip="Stand-Ups">
+                <button style="margin-right: 10px;" color="primary" mat-mini-fab>
+                  <span *ngIf="loggedIn" style="cursor: pointer;" data-width="22" data-height="22"  [hidden]="!toggleMode" class="iconify" data-icon="uil:external-link-alt"></span>
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="currUser === 'Rohit'">
+              <div routerLink="/users" *ngIf="currRoute !== 'users'" matTooltip="See Users">
+                <button style="margin-right: 10px;" mat-mini-fab>
+                  <span *ngIf="loggedIn" style="cursor: pointer;" data-width="22" data-height="22"  [hidden]="!toggleMode" class="iconify" data-icon="uil:kid"></span>
+                </button>
+              </div>
+              <!-- <div routerLink="/dashboard" *ngIf="currRoute === 'stand-ups'" matTooltip="Close Stand-Ups">
+                <span *ngIf="loggedIn" style="margin-right: 8px; cursor: pointer;" data-width="22" data-height="22"  [hidden]="!toggleMode" class="iconify" data-icon="ion:close-circle"></span>
+              </div> -->
+            </div>
+
+                <button *ngIf="loggedIn"  style="margin-right: 10px;" mat-mini-fab  routerLink="/messages" matTooltip="See Messages">
+                  <span *ngIf="loggedIn" style="cursor: pointer;" data-width="22" data-height="22" class="iconify" data-icon="uil:message"></span>
+                </button>
+
+
+
+            <button (click)="signOut()" *ngIf="loggedIn" style="font-size: 15px;" type="button" class="btn btn-warning">Sign-Out</button>
+          </div>
+
+      </div>
+     </div>
+  </header>
+</div>
+
+
+<header [hidden]="currRoute === 'kanban-table'" *ngIf="currRoute === 'kanban-history'" class="d-flex align-items-center bg-dark text-white" style="height: 60px;">
+  <div class="container">
+    <div style="flex: 2;" class="d-flex align-items-center">
+      <div class="d-flex align-items-center">
+        <a routerLink="/dashboard" style="font-size: 15px;" class="nav-link px-2 text-white">{{ currUser }}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<header *ngIf="currRoute === 'kanban-table'" class="d-flex align-items-center bg-dark text-white" style="height: 60px;">
+  <div class="container">
+    <div style="flex: 2;" class="d-flex align-items-center">
+      <div class="d-flex align-items-center">
+        <a routerLink="/dashboard" style="font-size: 15px;" class="nav-link px-2 text-white">{{ currUser }}</a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,245 @@
+.comment-section {
+  max-width: 800px; /* Increased width for a more spacious layout */
+  margin: 0 auto; /* Center the comment section */
+  padding: 15px; /* Increased padding for better spacing */
+  border: 1px solid #ddd; /* Light border for definition */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  background-color: #f7f7f7; /* Light background for contrast */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.comment {
+  display: flex;
+  flex-direction: column; /* Vertical layout for comments */
+  padding: 12px; /* Increased padding for each comment */
+  margin-bottom: 15px; /* Space between comments */
+  border-bottom: 1px solid #e0e0e0; /* Divider for clarity */
+}
+
+.comment p {
+  margin: 5px 0; /* Consistent spacing around text */
+  font-size: 16px; /* Slightly larger font size for readability */
+  line-height: 1.5; /* Improved line height for better readability */
+}
+
+.comment-author {
+  font-weight: bold; /* Bold author name */
+  color: #0078d4; /* Author name color */
+  font-size: 15px; /* Author name font size */
+  margin-bottom: 4px; /* Space below author name */
+}
+
+.comment-text {
+  font-size: 15px; /* Comment text size */
+  color: #333; /* Darker text color for contrast */
+}
+
+.replies {
+  padding-left: 25px; /* Space for replies */
+  margin-top: 10px; /* Space above replies */
+  background-color: #f1f1f1; /* Slightly different background for replies */
+  border-radius: 8px; /* Rounded corners for replies */
+  padding: 10px; /* Padding for replies */
+}
+
+.reply {
+  padding: 8px; /* Padding for each reply */
+  font-size: 14px; /* Font size for replies */
+  color: #555; /* Color for reply text */
+  border-bottom: 1px solid #e0e0e0; /* Divider for replies */
+}
+
+.reply p {
+  margin: 4px 0; /* Spacing for reply text */
+}
+
+.reply-author {
+  font-weight: bold; /* Bold reply author name */
+  color: #0078d4; /* Color for reply author */
+}
+
+.reply-input,
+.comment-input {
+  width: 100%; /* Full width inputs */
+  padding: 10px; /* Increased padding for inputs */
+  margin-top: 10px; /* Space above inputs */
+  border: 1px solid #ddd; /* Light border for inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
+  font-size: 14px; /* Font size for inputs */
+}
+
+.reply-button,
+.comment-button {
+  margin-top: 8px; /* Space above buttons */
+  padding: 8px 15px; /* Increased padding for buttons */
+  background-color: #0078d4; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 15px;
+  padding-left: 30px; /* Font size for buttons */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.reply-button:hover,
+.comment-button:hover {
+  background-color: #005bb5; /* Darker shade on hover */
+}
+
+/* Small Screen Adjustments */
+@media (max-width: 600px) {
+  .comment-section {
+    padding: 10px; /* Slightly reduced padding for small screens */
+  }
+
+  .comment,
+  .replies {
+    padding: 10px; /* Consistent padding */
+  }
+
+  .reply-input,
+  .comment-input {
+    font-size: 14px; /* Font size for inputs on small screens */
+  }
+}
+button.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn-secondary {
+  background-color: yellow;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button.btn-third {
+  margin-left: 20px;
+  background-color: violet;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn-primary:hover,
+button.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding-right: 20px; /* Space between priority and tickethours columns */
+}
+
+/* Modal Header */
+/* Modal Header */
+/* Modal Header */
+::ng-deep .modal-header {
+  background-color: #2c3e50; /* Dark blue-gray background for professionalism */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.25rem;
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+  margin-bottom: 20px;
+}
+
+/* Form Fields */
+::ng-deep .form-field {
+  margin-bottom: 20px; /* Moderate space between form fields */
+}
+
+::ng-deep mat-form-field {
+  width: 100%; /* Full width */
+}
+
+::ng-deep .mat-label {
+  font-size: 1rem;
+  font-weight: 500; /* Slightly bold for emphasis */
+  color: #333; /* Dark gray color for readability */
+}
+
+/* Input and Textarea Fields */
+::ng-deep input, ::ng-deep textarea {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 6px; /* Rounded corners */
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding doesn’t affect the width */
+  background-color: #f9f9f9; /* Light background for input fields */
+  transition: all 0.3s ease;
+}
+
+::ng-deep input:focus, ::ng-deep textarea:focus {
+  border-color: #3498db; /* Blue border on focus */
+  background-color: #fff; /* White background on focus */
+}
+
+/* Buttons */
+::ng-deep .save-btn, ::ng-deep .cancel-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .save-btn {
+  background-color: #3498db; /* Blue for save */
+  color: white;
+}
+
+::ng-deep .save-btn:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+::ng-deep .cancel-btn {
+  background-color: #e74c3c; /* Red for cancel */
+  color: white;
+}
+
+::ng-deep .cancel-btn:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Button Group */
+::ng-deep .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+::ng-deep .mat-dialog-container {
+  max-width: 400px !important; /* Adjust width as needed */
+  width: 400px !important; /* Force a fixed width for the modal */
+}
+/* Modal Content */
+::ng-deep .modal-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+
+/* Additional Styling */
+::ng-deep textarea {
+  resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+/* Optional: Adjust the modal backdrop for a more compact effect */
+::ng-deep .cdk-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay for focus */
+}

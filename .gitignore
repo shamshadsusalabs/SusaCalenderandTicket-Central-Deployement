@@ -1,0 +1,44 @@
+# 🔹 Node.js Dependencies (SusaCalenderapi/)
+SusaCalenderapi/node_modules/
+SusaCalenderapi/.env
+SusaCalenderapi/npm-debug.log
+SusaCalenderapi/yarn-error.log
+
+# 🔹 Angular Compiled Files (SusaCalenderweb/)
+SusaCalenderweb/node_modules/
+SusaCalenderweb/dist/
+SusaCalenderweb/tmp/
+SusaCalenderweb/out-tsc
+SusaCalenderweb/.angular/
+SusaCalenderweb/.angular/cache
+
+# 🔹 Common Ignore
+/.firebase/
+.firebase.json
+.firebaserc
+
+# 🔹 IDE & Editor Files
+.idea/
+.vscode/
+*.sublime-workspace
+*.launch
+.settings/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 🔹 Logs & OS Files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+*.log
+
+# 🔹 Coverage & Testing
+/coverage
+/libpeerconnection.log
+testem.log
+typings/

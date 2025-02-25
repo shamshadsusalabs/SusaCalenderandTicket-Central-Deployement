@@ -1,0 +1,73 @@
+<div class="row mt-2">
+  <div class="col d-flex justify-content-center align-items-center">
+    <button (click)="customAdd()" color="primary" mat-raised-button>Add Details</button>
+  </div>
+</div>
+
+<!-- Form for Yesterday, Today, and Tomorrow -->
+<div *ngIf="customAddBoolean" class="container" style="margin-top: 25px">
+  <form #f="ngForm" [formGroup]="customAddForm" (ngSubmit)="submitData(f.value)" style="border: 1px solid gray; border-radius: 5px; padding: 10px;">
+    
+    <!-- Yesterday -->
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Start Date (Yesterday)</mat-label>
+          <input matInput formControlName="startYesterday" [owlDateTimeTrigger]="yesterday" [owlDateTime]="yesterday" placeholder="Choose a date" required>
+          <mat-icon matSuffix [owlDateTimeTrigger]="yesterday" class="date-icon">today</mat-icon>
+          <owl-date-time #yesterday></owl-date-time>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Details (Yesterday)</mat-label>
+          <textarea formControlName="detailsYesterday" required matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Today -->
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Start Date (Today)</mat-label>
+          <input matInput formControlName="startToday" [owlDateTimeTrigger]="today" [owlDateTime]="today" placeholder="Choose a date" required>
+          <mat-icon matSuffix [owlDateTimeTrigger]="today" class="date-icon">today</mat-icon>
+          <owl-date-time #today></owl-date-time>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Details (Today)</mat-label>
+          <textarea formControlName="detailsToday" required matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Tomorrow -->
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Start Date (Tomorrow)</mat-label>
+          <input matInput formControlName="startTomorrow" [owlDateTimeTrigger]="tomorrow" [owlDateTime]="tomorrow" placeholder="Choose a date" required>
+          <mat-icon matSuffix [owlDateTimeTrigger]="tomorrow" class="date-icon">today</mat-icon>
+          <owl-date-time #tomorrow></owl-date-time>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field style="width: 100%;" appearance="outline">
+          <mat-label>Details (Tomorrow)</mat-label>
+          <textarea formControlName="detailsTomorrow" required matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row mt-2">
+      <div class="col d-flex justify-content-center align-items-center">
+        <button type="submit" color="primary" mat-raised-button>Submit</button>
+      </div>
+    </div>
+
+  </form>
+</div>

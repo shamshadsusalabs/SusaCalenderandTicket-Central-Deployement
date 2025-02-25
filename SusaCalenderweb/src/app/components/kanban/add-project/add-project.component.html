@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Create Project</h2>
+<mat-dialog-content [formGroup]="addProjectForm">
+  <!-- Project Name Field -->
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Project Name</mat-label>
+    <input matInput formControlName="projectName" required>
+    <mat-error *ngIf="addProjectForm.get('projectName')?.invalid && addProjectForm.get('projectName')?.touched">
+      Project name is required.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- User Select Dropdown for Multi-Selection -->
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Select Users</mat-label>
+    <mat-select formControlName="selectedUsers" multiple>
+      <mat-option *ngFor="let user of users" [value]="user._id">
+        {{ user.userName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="addProjectForm.invalid">Create</button>
+</mat-dialog-actions>

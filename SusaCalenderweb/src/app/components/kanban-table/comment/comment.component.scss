@@ -1,0 +1,8 @@
+table {
+  width: 100%; /* Ensures the table takes full width of its container */
+  table-layout: auto; /* Allows the table to adjust width based on content */
+}
+
+.mat-table {
+  overflow-x: auto; /* Allows horizontal scrolling if the content exceeds the width */
+}
